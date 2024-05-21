@@ -11,6 +11,8 @@ TagManager:
   - IceBlockL
   - IceBlockR
   - Wall
+  - LeftTP
+  - RightTP
   layers:
   - Default
   - TransparentFX

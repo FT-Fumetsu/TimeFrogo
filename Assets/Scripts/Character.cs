@@ -232,15 +232,6 @@ public class Character : MonoBehaviour
             }
         }
 
-        if(_currentPositionX == -4)
-        {
-            _currentPositionX = -3;
-        }
-
-        if(_currentPositionX == 4)
-        {
-            _currentPositionX = 3;
-        }
 
         _textScore.SetText("Score : " + _score.ToString());
     }
@@ -262,7 +253,16 @@ public class Character : MonoBehaviour
         }
         else if (other.gameObject.tag == "Obstacles")
         {
+            _echo.InvokeEchoStopSpeed();
             transform.SetParent(null);
+        }
+        else if (other.gameObject.tag == "LeftTP")
+        {
+            _currentPositionX = -3;
+        }
+        else if (other.gameObject.tag == "RightTP")
+        {
+            _currentPositionX = 3;
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -287,8 +287,8 @@ public class Character : MonoBehaviour
         {
             transform.SetParent(collision.transform);
 
-            float exactPositionX = collision.transform.position.x;
-            transform.position = new Vector3(exactPositionX, transform.position.y, transform.position.z);
+            //float exactPositionX = collision.transform.position.x;
+            //transform.position = new Vector3(exactPositionX, transform.position.y, transform.position.z);
 
             _currentIcePlatform = collision.gameObject;
             _lastIcePlatform = collision.collider;

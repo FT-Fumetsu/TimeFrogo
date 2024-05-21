@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00618237ae31dcb4db6e799a6f718a01, type: 3}
   m_Name: IceTile6
   m_EditorClassIdentifier: 
-  ground: {fileID: 4314408670184920181, guid: 5603d80563e26b645959eed0c8df4e95, type: 3}
+  ground: {fileID: 1939213383055668471, guid: 5d9a3592298650647b8a73e5a1e6c70f, type: 3}
   _maxInSuccesion: 1

@@ -127,14 +127,15 @@ public class Echo : MonoBehaviour
         _currentPositionX = pos.x;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void InvokeEchoStopSpeed()
     {
-        if(other.GetComponent<Character>() != null)
-        {
-            Destroy(other.gameObject);
-        }        
+        Invoke("EchoStopSpeed", _echoTimes._timeBeforeMove);
     }
 
+    private void EchoStopSpeed()
+    {
+        _echoSpeed = 0f;
+    }
     public void EchoMoveRight()
     {
         if (_currentPositionX >= _maxRightPosition)
