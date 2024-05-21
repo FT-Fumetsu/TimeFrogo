@@ -1,0 +1,46 @@
+{
+    "name": "InputBidings",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "af8c999a-773f-4e90-90cd-5f18e9acc5f4",
+            "actions": [
+                {
+                    "name": "Up",
+                    "type": "Button",
+                    "id": "67faaacc-0d6d-4c97-b453-4f8d74b3abc7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "735c7cbf-1e2c-449d-88cf-b9732b599324",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

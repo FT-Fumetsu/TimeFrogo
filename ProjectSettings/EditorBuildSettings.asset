@@ -4,5 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 1cac7361e2d6f954e88a783bbdda0ec1
+  - enabled: 1
+    path: Assets/Scenes/TimeFroggo.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 4508cb4564e4dd44ebcaa135948c7ff3, type: 2}

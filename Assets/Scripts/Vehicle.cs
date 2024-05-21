@@ -5,9 +5,9 @@ using UnityEngine;
 public class Vehicle : MonoBehaviour
 {
     [SerializeField] private float _speed = 0f;
+    public float vitesse { get { return _speed; } }
     [SerializeField] private float _timeDeath = 0f;
     [SerializeField] private float _timer = 5f;
-    [SerializeField] private Character _character;
     private void Start()
     {
         if (transform.position.x > 0)
@@ -18,7 +18,7 @@ public class Vehicle : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.right * _speed * Time.deltaTime);
+        TranslatePosition();
         _timeDeath += Time.deltaTime;
         if (_timeDeath >= _timer)
         {
@@ -26,9 +26,8 @@ public class Vehicle : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void TranslatePosition()
     {
-        Destroy(other.gameObject);
+        transform.Translate(Vector3.right * _speed * Time.deltaTime);
     }
 }

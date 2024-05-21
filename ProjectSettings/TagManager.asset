@@ -4,8 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Vehicle
   - Obstacles
+  - Vehicle
+  - Water
+  - Echo
+  - IceBlockL
+  - IceBlockR
+  - Wall
   layers:
   - Default
   - TransparentFX
