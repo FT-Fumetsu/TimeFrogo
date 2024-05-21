@@ -72,6 +72,8 @@ public class Echo : MonoBehaviour
                 break;
         }*/
 
+        Debug.Log(_echoSpeed);
+
         transform.Translate(Vector3.right * _echoSpeed * Time.deltaTime);       
     }
     public void InvokeEchoMoveUp()
@@ -92,6 +94,7 @@ public class Echo : MonoBehaviour
     }
     public void InvokeEchoSlide()
     {
+        Debug.Log("InvokeEchoSlide");
         Invoke("EchoSlide", _echoTimes._timeBeforeMove);
     }
     public void InvokeEchoStopSlide() 
@@ -101,6 +104,7 @@ public class Echo : MonoBehaviour
     }
     public void InvokeEchoSlideNeg()
     {
+        Debug.Log("InvokeEchoSlideNeg");
         Invoke("EchoSlideNeg", _echoTimes._timeBeforeMove);
     }
     public void EchoSlide()

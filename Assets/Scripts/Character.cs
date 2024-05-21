@@ -272,7 +272,7 @@ public class Character : MonoBehaviour
             _currentIcePlatform = null;
 
             Debug.Log("Exit Collision");
-            _echo.InvokeEchoStopSlide();
+            //_echo.InvokeEchoStopSlide();
             //transform.SetParent(null);
             float xPos = collision.transform.position.x;
             int roundXPos = Mathf.RoundToInt(xPos);
@@ -338,6 +338,7 @@ public class Character : MonoBehaviour
             _lastIcePlatform.enabled = false;
         }
         transform.SetParent(null);
+        _echo.InvokeEchoStopSlide();
     }
     public void MoveLeft()
     {
@@ -360,6 +361,7 @@ public class Character : MonoBehaviour
             _lastIcePlatform.enabled = false;
         }
         transform.SetParent(null);
+        _echo.InvokeEchoStopSlide();
     }
     public void MoveUp()
     {
@@ -368,6 +370,7 @@ public class Character : MonoBehaviour
         ApplyZPosition();
         _echo.InvokeEchoMoveUp();
         transform.SetParent(null);
+        _echo.InvokeEchoStopSlide();
     }
     public void MoveDown()
     {
@@ -376,6 +379,7 @@ public class Character : MonoBehaviour
         ApplyZPosition();
         _echo.InvokeEchoMoveDown();
         transform.SetParent(null);
+        _echo.InvokeEchoStopSlide();
     }
     private void ApplyXPosition()
     {
