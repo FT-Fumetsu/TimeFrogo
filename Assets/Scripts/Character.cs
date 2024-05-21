@@ -276,8 +276,8 @@ public class Character : MonoBehaviour
             //transform.SetParent(null);
             float xPos = collision.transform.position.x;
             int roundXPos = Mathf.RoundToInt(xPos);
-            //Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
-            //transform.position = pos;
+            Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
+            transform.position = pos;
             _currentPositionX = roundXPos;
         }
     }
