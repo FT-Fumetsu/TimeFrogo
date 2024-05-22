@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class Character : MonoBehaviour
 {
     [Header("References")]
-    //[SerializeField] private Character _player = null;
-    [SerializeField] private Transform _transform = null;
+    [SerializeField] private Character _player;
+    [SerializeField] private Transform _transform;
     [SerializeField] private GroundSpawn _groundGenerator;
     [SerializeField] private FollowPlayer _followPlayer;
     [SerializeField] private GroundSpawn _groundSpawn;
@@ -41,12 +41,14 @@ public class Character : MonoBehaviour
     public float _currentPositionX = 0.0f;
     public float _currentPositionZ = 0.0f;
     private float xpos;
+    //private bool _isNull;
 
     private Collider _lastIcePlatform = null;
     private GameObject _currentIcePlatform = null;
 
     private void Start()
     {
+        //_isNull = false;
         _buttonMenu.UnPause();
         _paused = false;
     }
@@ -64,10 +66,23 @@ public class Character : MonoBehaviour
             _pauseMenu.SetActive(true);
         }
 
+        //if (_chrono >= .2)
+        //{
+        //    _isNull = true;
+        //}
+
         if (_paused == false)
         {
             _pauseMenu.SetActive(false);
         }
+
+        //if (_isNull == false)
+        //{
+        //    return;
+        //}
+        //else if (_isNull == true)
+        //{
+        //}
 
         if (Input.GetKeyDown(_leftKey) && _chrono > _inputTimer)
         {
@@ -232,7 +247,6 @@ public class Character : MonoBehaviour
             }
         }
 
-
         _textScore.SetText("Score : " + _score.ToString());
     }
     private void OnTriggerEnter(Collider other)
@@ -241,14 +255,12 @@ public class Character : MonoBehaviour
         {
             _failedMenu.SetActive(true);
             _groundGenerator._isAlive = false;
-            _timer._keepTime = false;
             Destroy(gameObject);
         }
         else if (other.gameObject.tag == "CrackedIce" || other.gameObject.tag == "Case" || other.gameObject.tag == "Trapdoor" || other.gameObject.tag == "Laser")
         {
             _failedMenu.SetActive(true);
             _groundGenerator._isAlive = false;
-            _timer._keepTime = false;
             Destroy(gameObject);
         }
         else if (other.gameObject.tag == "Obstacles")
