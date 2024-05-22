@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GroundSpawn : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Character _player;
     [SerializeField] private GameObject _safeSpawn;
     [SerializeField] private Transform _groundHolder;
     private List<GameObject> _currentGround = new List<GameObject>();
@@ -15,6 +17,8 @@ public class GroundSpawn : MonoBehaviour
     [SerializeField] private AudioSource _audioPresent;
     [SerializeField] private AudioSource _audioPast;
     [SerializeField] private AudioSource _audioFutur;
+
+    [Header("Balancing")]
     private int actualList=0;
     private List<GroundData> _choixList;
     public Vector3 _currentPosition = new Vector3(0, 0, 0);

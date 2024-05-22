@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
     [SerializeField] private Vehicle _vehicle;
     [SerializeField] private Chrono _timer;
     [SerializeField] private RestartQuit _buttonMenu;
+    [SerializeField] private FailedPauseMenu _faildedPauseMenu;
 
     [Header("Balancing")]
     [SerializeField,Range(0,10)] private float _inputTimer;
@@ -32,8 +33,7 @@ public class Character : MonoBehaviour
     [SerializeField] private KeyCode _upKey = KeyCode.UpArrow;
     [SerializeField] private KeyCode _downKey = KeyCode.DownArrow;
     [SerializeField] private KeyCode _escape = KeyCode.Escape;
-    [SerializeField] private GameObject _failedMenu;
-    [SerializeField] private GameObject _pauseMenu;
+
     public bool _paused;
     float _score = 0;
     private float _chrono;
@@ -63,7 +63,7 @@ public class Character : MonoBehaviour
 
         if (_paused == true)
         {
-            _pauseMenu.SetActive(true);
+            _faildedPauseMenu.PauseMenu();
         }
 
         //if (_chrono >= .2)
@@ -73,7 +73,7 @@ public class Character : MonoBehaviour
 
         if (_paused == false)
         {
-            _pauseMenu.SetActive(false);
+            _faildedPauseMenu.Unpause();
         }
 
         //if (_isNull == false)
@@ -83,7 +83,7 @@ public class Character : MonoBehaviour
         //else if (_isNull == true)
         //{
         //}
-
+        
         if (Input.GetKeyDown(_leftKey) && _chrono > _inputTimer)
         {
             _chrono = 0;
@@ -253,13 +253,13 @@ public class Character : MonoBehaviour
     {
         if (other.gameObject.tag == "Vehicle" || other.gameObject.tag == "Water" || other.gameObject.tag == "Echo")
         {
-            _failedMenu.SetActive(true);
+            _faildedPauseMenu.GameOver();
             _groundGenerator._isAlive = false;
             Destroy(gameObject);
         }
         else if (other.gameObject.tag == "CrackedIce" || other.gameObject.tag == "Case" || other.gameObject.tag == "Trapdoor" || other.gameObject.tag == "Laser")
         {
-            _failedMenu.SetActive(true);
+            _faildedPauseMenu.GameOver();
             _groundGenerator._isAlive = false;
             Destroy(gameObject);
         }
@@ -432,4 +432,5 @@ public class Character : MonoBehaviour
             _echo.EchoCommands.Add(command);
         }
     }*/
+    
 }
