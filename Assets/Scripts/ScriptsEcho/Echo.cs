@@ -20,60 +20,12 @@ public class Echo : MonoBehaviour
     private float _currentPositionX = 0.0f;
     private float _currentPositionZ = 0.0f;
 
-    //public List<EchoCommand> EchoCommands = new List<EchoCommand>();
-    //private int _commandIndex = 0;
-
-    //public IceBlockMovementDir _movementDir = IceBlockMovementDir.None;
-
-    /*private void OnGUI()
-    {
-        if (GUILayout.Button("Move"))
-        {
-            IterateInCommands();
-        }
-    }
-
-    public void IterateInCommands()
-    {
-        if (EchoCommands == null || EchoCommands.Count == 0)
-        {
-            return;
-        }
-
-        if (_commandIndex >= EchoCommands.Count)
-        {
-            return;
-        }
-
-        EchoCommand nextCommand = EchoCommands[_commandIndex];
-
-        nextCommand.Execute();
-
-        _commandIndex++;
-    }*/
-
     private void Start()
     {
         _echoSpeed = 0;
-
-        //_echoTimes.OnTimerReach += IterateInCommands;
     }
     private void Update()
     {
-        /*switch (_movementDir)
-        {
-            case IceBlockMovementDir.None:
-                break;
-            case IceBlockMovementDir.Left:
-                EchoSlideNeg();
-                break;
-            case IceBlockMovementDir.Right:
-                EchoSlide();
-                break;
-        }*/
-
-        Debug.Log(_echoSpeed);
-
         transform.Translate(Vector3.right * _echoSpeed * Time.deltaTime);       
     }
     public void InvokeEchoMoveUp()
@@ -94,17 +46,14 @@ public class Echo : MonoBehaviour
     }
     public void InvokeEchoSlide()
     {
-        Debug.Log("InvokeEchoSlide");
         Invoke("EchoSlide", _echoTimes._timeBeforeMove);
     }
     public void InvokeEchoStopSlide() 
     {
-        Debug.Log("InvokeEchoStopSlide");
         Invoke("EchoStopSlide", _echoTimes._timeBeforeMove);
     }
     public void InvokeEchoSlideNeg()
     {
-        Debug.Log("InvokeEchoSlideNeg");
         Invoke("EchoSlideNeg", _echoTimes._timeBeforeMove);
     }
     public void EchoSlide()
@@ -117,7 +66,6 @@ public class Echo : MonoBehaviour
     }
     public void EchoStopSlide()
     {
-        Debug.Log("EchoStopSlide");
         _echoSpeed = 0;
 
         float xPos = transform.position.x;
@@ -188,51 +136,3 @@ public class Echo : MonoBehaviour
         _transform.position = newPosition;
     }
 }
-
-/*public abstract class EchoCommand
-{
-    public abstract void Execute();
-}
-
-[Serializable]
-public class MovementEchoCommand : EchoCommand
-{
-    [SerializeField] private Echo _echo = null;
-    [SerializeField] private Vector3 _nextPosition = Vector3.zero;
-
-    public MovementEchoCommand(Echo echo, Vector3 nextPosition)
-    {
-        _echo = echo;
-        _nextPosition = nextPosition;
-    }
-
-    public override void Execute()
-    {
-        _echo.transform.position = _nextPosition;
-    }
-}
-
-[Serializable]
-public class IceBlocMovementCommand : EchoCommand
-{
-    private Echo _echo = null;
-    private IceBlockMovementDir _movement = 0.0f;
-
-    public IceBlocMovementCommand(Echo echo, IceBlockMovementDir movement)
-    {
-        _echo = echo;
-        _movement = movement;  
-    }
-
-    public override void Execute()
-    {
-        _echo._movementDir = _movement;
-    }
-}*/
-
-/*public enum IceBlockMovementDir
-{
-    None,
-    Left,
-    Right,
-}*/

@@ -3531,7 +3531,7 @@ GameObject:
   - component: {fileID: 1649437650}
   - component: {fileID: 1649437651}
   m_Layer: 0
-  m_Name: EmptyPlayer
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3599,7 +3599,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1649437650
 MonoBehaviour:
@@ -4171,7 +4171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1720966104982098303, guid: 660664fe4af52d94585f2e547e2b153c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1720966104982098303, guid: 660664fe4af52d94585f2e547e2b153c, type: 3}
       propertyPath: m_TagString

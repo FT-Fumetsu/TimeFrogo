@@ -70,10 +70,7 @@ public class GroundSpawn : MonoBehaviour
             }
             ChangeBiome();
         }
-        else if (_isAlive == false)
-        {
-            //Debug.Log("Is Dead");
-        }
+
         if(Input.GetKeyDown(KeyCode.Space)) 
         {
             _chronoChangeBiome = 59f;

@@ -41,14 +41,11 @@ public class Character : MonoBehaviour
     public float _currentPositionX = 0.0f;
     public float _currentPositionZ = 0.0f;
     private float xpos;
-    //private bool _isNull;
-
     private Collider _lastIcePlatform = null;
     private GameObject _currentIcePlatform = null;
 
     private void Start()
     {
-        //_isNull = false;
         _buttonMenu.UnPause();
         _paused = false;
     }
@@ -56,42 +53,26 @@ public class Character : MonoBehaviour
     {
         _chrono += Time.deltaTime;
         RaycastHit hit;
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1, Color.red);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 1, Color.red);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * 1, Color.red);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.back) * 1, Color.red);
+        DrawRaycasts();
 
         if (_paused == true)
         {
             _faildedPauseMenu.PauseMenu();
         }
 
-        //if (_chrono >= .2)
-        //{
-        //    _isNull = true;
-        //}
-
         if (_paused == false)
         {
             _faildedPauseMenu.Unpause();
         }
-
-        //if (_isNull == false)
-        //{
-        //    return;
-        //}
-        //else if (_isNull == true)
-        //{
-        //}
         
         if (Input.GetKeyDown(_leftKey) && _chrono > _inputTimer)
         {
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.left), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
-                    Debug.Log(hit.transform.name + "left");
+                    return;
                 }
             }
             else
@@ -103,11 +84,11 @@ public class Character : MonoBehaviour
         if (Input.GetKeyDown(_rightKey) && _chrono > _inputTimer)
         {
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.right), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
-                    Debug.Log(hit.transform.name + "right");
+                    Debug.Log(hit.transform.name + " right");
                 }
             }
             else
@@ -119,26 +100,23 @@ public class Character : MonoBehaviour
         if (Input.GetKeyDown(_upKey) && _chrono > _inputTimer)
         {
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
+            if (Physics.Raycast(new Vector3(transform.position.x + 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
                     Debug.Log(hit.transform.name + "up");
-                }
+                }                        
             }
             else
             {
                 MoveUp();
-                if(_currentPositionZ <= _maxPositionZReach) 
+                if (_currentPositionZ <= _maxPositionZReach)
                 {
-                    Debug.Log("Max Position Z Reach not up");
+                    return;
                 }
                 else
                 {
-                    _followPlayer.MoveUp();
-                    _maxPositionZReach = _currentPositionZ;
-                    _score++;
-                    _groundSpawn.SpawnGround(transform.position);
+                    SpawnGround();
                 }
             }
         }
@@ -146,17 +124,16 @@ public class Character : MonoBehaviour
         if (Input.GetKeyDown(_downKey) && _chrono > _inputTimer)
         {
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x + 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
-                    Debug.Log(hit.transform.name + "down");
+                    return;
                 }
             }
             else
             {
                 MoveDown();
-
             }
         }
 
@@ -165,6 +142,7 @@ public class Character : MonoBehaviour
             _paused = true;
             Time.timeScale = 0;
         }
+
         else if(Input.GetKeyDown(_escape) && _paused == true)
         {
             _paused = false;
@@ -174,11 +152,11 @@ public class Character : MonoBehaviour
         if (Input.GetKey(_leftKey) && _chrono > _getKeyTimer)
         {
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.left), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
-                    Debug.Log(hit.transform.name + "left");
+                    return;
                 }
             }
             else
@@ -190,11 +168,11 @@ public class Character : MonoBehaviour
         if (Input.GetKey(_rightKey) && _chrono > _getKeyTimer)
         {
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.right), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
-                    Debug.Log(hit.transform.name + "right");
+                    Debug.Log(hit.transform.name + " right");
                 }
             }
             else
@@ -206,7 +184,7 @@ public class Character : MonoBehaviour
         if (Input.GetKey(_upKey) && _chrono > _getKeyTimer)
         {
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
+            if (Physics.Raycast(new Vector3(transform.position.x + 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
@@ -215,17 +193,14 @@ public class Character : MonoBehaviour
             }
             else
             {
-                MoveUp();
-                if (_currentPositionZ <= _maxPositionZReach)
+                _player.MoveUp();
+                if (_player._currentPositionZ <= _player._maxPositionZReach)
                 {
-                    Debug.Log("Max Position Z Reach not up");
+                    return;
                 }
                 else
                 {
-                    _followPlayer.MoveUp();
-                    _maxPositionZReach = _currentPositionZ;
-                    _score++;
-                    _groundSpawn.SpawnGround(transform.position);
+                    SpawnGround();
                 }
             }
         }
@@ -233,17 +208,16 @@ public class Character : MonoBehaviour
         if (Input.GetKey(_downKey) && _chrono > _getKeyTimer)
         {
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x + 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
-                    Debug.Log(hit.transform.name + "down");
+                    return;
                 }
             }
             else
             {
                 MoveDown();
-
             }
         }
 
@@ -282,10 +256,6 @@ public class Character : MonoBehaviour
         if (collision.gameObject.tag == "IceBlockR" || collision.gameObject.tag == "IceBlockL")
         {
             _currentIcePlatform = null;
-
-            Debug.Log("Exit Collision");
-            //_echo.InvokeEchoStopSlide();
-            //transform.SetParent(null);
             float xPos = collision.transform.position.x;
             int roundXPos = Mathf.RoundToInt(xPos);
             Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
@@ -320,15 +290,6 @@ public class Character : MonoBehaviour
             }            
         }
     }
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.TryGetComponent(out Vehicle vehicle))
-    //    {
-    //        Vector3 translatePlatform = transform.position;
-    //        translatePlatform.x += vehicle.vitesse * Time.deltaTime;
-    //        transform.position = translatePlatform;
-    //    }
-    //}
     public void MoveRight()
     {
         if (_currentPositionX >= _maxRightPosition)
@@ -397,40 +358,38 @@ public class Character : MonoBehaviour
     {
         Vector3 newPosition = transform.position;
         newPosition.x = _currentPositionX;
-
         _transform.position = newPosition;
-
-        /*if(_currentIcePlatform != null)
-        {
-            IceBlocMovementCommand iceBlocMovementCommand = new IceBlocMovementCommand(_echo, IceBlockMovementDir.None);
-            _echo.EchoCommands.Add(iceBlocMovementCommand);
-        }
-
-        AddMovementEchoCommand(newPosition);*/
     }
 
     private void ApplyZPosition()
     {
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
-
         _transform.position = newPosition;
-
-        //AddMovementEchoCommand(newPosition);
     }
-
-    /*private void AddMovementEchoCommand(Vector3 newPosition)
+    public void SpawnGround()
     {
-        if (_echo != null)
-        {
-            if(_currentIcePlatform != null)
-            {
-                Debug.Log("Is On Platform.");
-            }
+        _followPlayer.MoveUp();
+        _maxPositionZReach = _currentPositionZ;
+        _score++;
+        _groundSpawn.SpawnGround(transform.position);
+    }
+    private void DrawRaycasts()
+    {
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x + 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x - 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward) * 1, Color.red);
 
-            MovementEchoCommand command = new MovementEchoCommand(_echo, newPosition);
-            _echo.EchoCommands.Add(command);
-        }
-    }*/
-    
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.right) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.right) * 1, Color.red);
+
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.left) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.left) * 1, Color.red);
+
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.back) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x + 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x - 0.4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
+    }
 }
