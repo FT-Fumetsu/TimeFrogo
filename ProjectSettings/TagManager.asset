@@ -11,8 +11,9 @@ TagManager:
   - IceBlockL
   - IceBlockR
   - Wall
-  - LeftTP
-  - RightTP
+  - Audio
+  - Crate
+  - Trapdoor
   layers:
   - Default
   - TransparentFX

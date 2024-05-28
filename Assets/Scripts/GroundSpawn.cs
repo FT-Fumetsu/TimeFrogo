@@ -15,8 +15,13 @@ public class GroundSpawn : MonoBehaviour
     [SerializeField] private List<GroundData> _groundDatasFutur ;
     [SerializeField] private GameObject _vfxSnow;
     [SerializeField] private AudioSource _audioPresent;
+    public AudioSource _forestSfx;
+    public AudioSource _truckSfx;
     [SerializeField] private AudioSource _audioPast;
+    public AudioSource _riverSfx;
+    public AudioSource _snowStormSfx;
     [SerializeField] private AudioSource _audioFutur;
+    public AudioSource _futurAmbianceSfx;
 
     [Header("Balancing")]
     private int actualList=0;
@@ -34,19 +39,15 @@ public class GroundSpawn : MonoBehaviour
 
     private GroundData lastGroundData = null;
     private GroundData nextGroundData = null;
-    //private bool _present;
-    //private bool _past;
-    //private bool _future;
-
     private void Start()
     {
         _isAlive = true;
         actualList = 0;
         _choixList = _groundDatasPresent;
         SafeSpawnStart();
-        _audioPresent.mute = false;
-        _audioPast.mute = true;
-        _audioFutur.mute = true;
+        PlayPresentMusic();
+        StopPastMusic();
+        StopFuturMusic();
     }
     private void Update()
     {
@@ -124,6 +125,8 @@ public class GroundSpawn : MonoBehaviour
         {
             if (actualList == 2)
             {
+                StopFuturMusic();
+                PlayPresentMusic();
                 _chronoChangeBiome = 0;
                 //actualList = Random.Range(0, 1);
                 actualList = 0;
@@ -134,8 +137,8 @@ public class GroundSpawn : MonoBehaviour
         {
             if (actualList == 1)
             {
-                _audioPast.mute = true;
-                _audioPresent.mute = false;
+                StopPastMusic();
+                PlayPresentMusic();
                 _chronoChangeBiome = 0;
                 actualList = 0;
                 _choixList = _groundDatasPresent;
@@ -145,13 +148,47 @@ public class GroundSpawn : MonoBehaviour
         {
             if (actualList == 0)
             {
-                _audioPresent.mute = true;
-                _audioPast.mute = false;
+                StopPresentMusic();
+                PlayPastMusic();
                 _chronoChangeBiome = 0;
                 //actualList = Random.Range(1, 2);
                 actualList = 1;
                 _choixList = _groundDatasPast;
             }
         }
+    }
+    private void PlayPresentMusic()
+    {
+        _audioPresent.mute = false;
+        _forestSfx.mute = false;
+        _truckSfx.mute = false;
+    }
+    private void PlayPastMusic()
+    {
+        _audioPast.mute = false;
+        _snowStormSfx.mute = false;
+        _riverSfx.mute = false;
+    }
+    private void PlayFuturMusic()
+    {
+        _audioFutur.mute = false;
+        _futurAmbianceSfx.mute = false;
+    }
+    private void StopPresentMusic()
+    {
+        _audioPresent.mute = true;
+        _forestSfx.mute = true;
+        _truckSfx.mute = true;
+    }
+    private void StopPastMusic()
+    {
+        _audioPast.mute = true;
+        _snowStormSfx.mute = true;
+        _riverSfx.mute = true;
+    }
+    private void StopFuturMusic()
+    {
+        _audioFutur.mute = true;
+        _futurAmbianceSfx.mute= true;
     }
 }

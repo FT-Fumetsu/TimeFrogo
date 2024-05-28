@@ -20,6 +20,8 @@ public class Echo : MonoBehaviour
     private float _currentPositionX = 0.0f;
     private float _currentPositionZ = 0.0f;
 
+    private List<Vector3> _exitPlatformPosition = new List<Vector3>();
+
     private void Start()
     {
         _echoSpeed = 0;
@@ -28,33 +30,39 @@ public class Echo : MonoBehaviour
     {
         transform.Translate(Vector3.right * _echoSpeed * Time.deltaTime);       
     }
-    public void InvokeEchoMoveUp()
+    public void InvokeEchoMoveUp(Vector3 nextPlayerPos)
     {
-        Invoke("EchoMoveUp", _echoTimes._timeBeforeMove);
+        Invoke(nameof(EchoMoveUp), _echoTimes._timeBeforeMove);
     }
-    public void InvokeEchoMoveDown() 
+    public void InvokeEchoMoveDown(Vector3 nextPlayerPos) 
     {
-        Invoke("EchoMoveDown", _echoTimes._timeBeforeMove);
+        Invoke(nameof(EchoMoveDown), _echoTimes._timeBeforeMove);
     }
-    public void InvokeEchoMoveLeft()
+    public void InvokeEchoMoveLeft(Vector3 nextPlayerPos)
     {
-        Invoke("EchoMoveLeft", _echoTimes._timeBeforeMove);
+        Invoke(nameof (EchoMoveLeft), _echoTimes._timeBeforeMove);
     }
-    public void InvokeEchoMoveRight()
+    public void InvokeEchoMoveRight(Vector3 nextPlayerPos)
     {
-        Invoke("EchoMoveRight", _echoTimes._timeBeforeMove);
-    }
-    public void InvokeEchoSlide()
-    {
-        Invoke("EchoSlide", _echoTimes._timeBeforeMove);
-    }
-    public void InvokeEchoStopSlide() 
-    {
-        Invoke("EchoStopSlide", _echoTimes._timeBeforeMove);
+        Invoke(nameof(EchoMoveRight), _echoTimes._timeBeforeMove);
     }
     public void InvokeEchoSlideNeg()
     {
         Invoke("EchoSlideNeg", _echoTimes._timeBeforeMove);
+    }
+    public void InvokeEchoStopSlide(Vector3 nextPlayerPos) 
+    {
+        Invoke(nameof(EchoStopSlide), _echoTimes._timeBeforeMove);
+    }
+
+    public void InvokeExitPlatform()
+    {
+        Invoke(nameof(ExitPlatform), _echoTimes._timeBeforeMove);
+    }
+
+    public void InvokeEchoSlide()
+    {
+        Invoke("EchoSlide", _echoTimes._timeBeforeMove);
     }
     public void EchoSlide()
     {
@@ -63,6 +71,15 @@ public class Echo : MonoBehaviour
     public void EchoSlideNeg()
     {
         _echoSpeed = _speed;
+    }
+
+    public void ExitPlatform()
+    {
+        Debug.Log("EXIT PLATFORM");
+        Vector3 fixedPosition = _exitPlatformPosition[0];
+        _exitPlatformPosition.RemoveAt(0);
+
+        transform.position = fixedPosition;
     }
     public void EchoStopSlide()
     {
@@ -73,7 +90,11 @@ public class Echo : MonoBehaviour
         Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
         transform.position = pos;
         _currentPositionX = roundXPos;
+
+        Debug.Log("1");
     }
+
+
 
     public void InvokeEchoStopSpeed()
     {
@@ -124,7 +145,6 @@ public class Echo : MonoBehaviour
     {
         Vector3 newPosition = transform.position;
         newPosition.x = _currentPositionX;
-
         _transform.position = newPosition;
     }
 
@@ -132,7 +152,11 @@ public class Echo : MonoBehaviour
     {
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
-
         _transform.position = newPosition;
+    }
+
+    public void AddExitPlatformPosition(Vector3 position)
+    {
+        _exitPlatformPosition.Add(position);
     }
 }

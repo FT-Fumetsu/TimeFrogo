@@ -21,6 +21,7 @@ public class Character : MonoBehaviour
     [SerializeField] private Chrono _timer;
     [SerializeField] private RestartQuit _buttonMenu;
     [SerializeField] private FailedPauseMenu _faildedPauseMenu;
+    [SerializeField] private AudioManager _audioManager;
 
     [Header("Balancing")]
     [SerializeField,Range(0,10)] private float _inputTimer;
@@ -33,7 +34,9 @@ public class Character : MonoBehaviour
     [SerializeField] private KeyCode _upKey = KeyCode.UpArrow;
     [SerializeField] private KeyCode _downKey = KeyCode.DownArrow;
     [SerializeField] private KeyCode _escape = KeyCode.Escape;
+    [SerializeField] private float _speed;
 
+    private float _playerSpeed;
     public bool _paused;
     float _score = 0;
     private float _chrono;
@@ -46,11 +49,14 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
+        _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        _playerSpeed = 0;
         _buttonMenu.UnPause();
         _paused = false;
     }
     private void Update()
     {
+        transform.Translate(Vector3.right * _playerSpeed * Time.deltaTime);
         _chrono += Time.deltaTime;
         RaycastHit hit;
         DrawRaycasts();
@@ -225,30 +231,47 @@ public class Character : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Vehicle" || other.gameObject.tag == "Water" || other.gameObject.tag == "Echo")
+        if (other.gameObject.tag == "Vehicle")
+        {
+            GameOver();
+            _audioManager.PlaySFX(_audioManager._deathCrush);
+            _audioManager.PlaySFX(_audioManager._deathTruck);
+            _groundGenerator._isAlive = false;
+            DestroyPlayer();
+        }
+        else if(other.gameObject.tag == "Water")
+        {
+            GameOver();
+            _audioManager.PlaySFX(_audioManager._splashSFX);
+            _groundGenerator._isAlive = false;
+            DestroyPlayer();
+        }
+        else if (other.gameObject.tag == "Crate")
+        {
+            GameOver();
+            _audioManager.PlaySFX(_audioManager._deathCrush);
+            _audioManager.PlaySFX(_audioManager._deathTruck);
+            _groundGenerator._isAlive = false;
+            DestroyPlayer();
+        }
+        else if(other.gameObject.tag == "Echo")
+        {
+            GameOver();
+            _groundGenerator._isAlive = false;
+            Destroy(gameObject);
+        }
+        else if(other.gameObject.tag == "Trapdoor")
+        {
+            GameOver();
+            _audioManager.PlaySFX(_audioManager._fall);
+            _groundGenerator._isAlive = false;
+            DestroyPlayer();
+        }
+        else if (other.gameObject.tag == "CrackedIce" || other.gameObject.tag == "Laser")
         {
             _faildedPauseMenu.GameOver();
             _groundGenerator._isAlive = false;
             Destroy(gameObject);
-        }
-        else if (other.gameObject.tag == "CrackedIce" || other.gameObject.tag == "Case" || other.gameObject.tag == "Trapdoor" || other.gameObject.tag == "Laser")
-        {
-            _faildedPauseMenu.GameOver();
-            _groundGenerator._isAlive = false;
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.tag == "Obstacles")
-        {
-            _echo.InvokeEchoStopSpeed();
-            transform.SetParent(null);
-        }
-        else if (other.gameObject.tag == "LeftTP")
-        {
-            _currentPositionX = -3;
-        }
-        else if (other.gameObject.tag == "RightTP")
-        {
-            _currentPositionX = 3;
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -261,6 +284,9 @@ public class Character : MonoBehaviour
             Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
             transform.position = pos;
             _currentPositionX = roundXPos;
+
+            _echo.AddExitPlatformPosition(pos);
+            _echo.InvokeExitPlatform();
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -268,25 +294,18 @@ public class Character : MonoBehaviour
         if (collision.gameObject.tag == "IceBlockR" || collision.gameObject.tag == "IceBlockL" && collision.collider != _lastIcePlatform)
         {
             transform.SetParent(collision.transform);
-
-            //float exactPositionX = collision.transform.position.x;
-            //transform.position = new Vector3(exactPositionX, transform.position.y, transform.position.z);
-
             _currentIcePlatform = collision.gameObject;
             _lastIcePlatform = collision.collider;
 
             if (collision.gameObject.tag == "IceBlockL")
             {
+                //_playerSpeed = _speed;
                 _echo.InvokeEchoSlideNeg();
-
-                /*IceBlocMovementCommand iceBlocMovementCommand = new IceBlocMovementCommand(_echo, IceBlockMovementDir.Left);
-                _echo.EchoCommands.Add(iceBlocMovementCommand);*/
             }
             else if (collision.gameObject.tag == "IceBlockR")
             {
+                //_playerSpeed = -_speed;
                 _echo.InvokeEchoSlide();
-                /*IceBlocMovementCommand iceBlocMovementCommand = new IceBlocMovementCommand(_echo, IceBlockMovementDir.Right);
-                _echo.EchoCommands.Add(iceBlocMovementCommand);*/
             }            
         }
     }
@@ -301,17 +320,18 @@ public class Character : MonoBehaviour
         {
             _currentPositionX = Mathf.RoundToInt(transform.position.x);
         }
-
+        _audioManager.PlaySFX(_audioManager._jump);
         _visuPlayer.RotationRight();
         _currentPositionX += _movement;
         ApplyXPosition();
-        _echo.InvokeEchoMoveRight();
+        _echo.InvokeEchoMoveRight(transform.position);
         if(_lastIcePlatform != null)
         {
             _lastIcePlatform.enabled = false;
         }
         transform.SetParent(null);
-        _echo.InvokeEchoStopSlide();
+        //_playerSpeed = 0;
+        _echo.InvokeEchoStopSlide(transform.position);
     }
     public void MoveLeft()
     {
@@ -325,34 +345,40 @@ public class Character : MonoBehaviour
             _currentPositionX = Mathf.RoundToInt(transform.position.x);
         }
 
+        _audioManager.PlaySFX(_audioManager._jump);
         _visuPlayer.RotationLeft();
         _currentPositionX -= _movement;
         ApplyXPosition();
-        _echo.InvokeEchoMoveLeft();
+        _echo.InvokeEchoMoveLeft(transform.position);
         if(_lastIcePlatform != null)
         {
             _lastIcePlatform.enabled = false;
         }
         transform.SetParent(null);
-        _echo.InvokeEchoStopSlide();
+        //_playerSpeed = 0;
+        _echo.InvokeEchoStopSlide(transform.position);
     }
     public void MoveUp()
     {
+        _audioManager.PlaySFX(_audioManager._jump);
         _visuPlayer.RotationUp();
         _currentPositionZ += _movement;
         ApplyZPosition();
-        _echo.InvokeEchoMoveUp();
+        _echo.InvokeEchoMoveUp(transform.position);
         transform.SetParent(null);
-        _echo.InvokeEchoStopSlide();
+        //_playerSpeed = 0;
+        _echo.InvokeEchoStopSlide(transform.position);
     }
     public void MoveDown()
     {
+        _audioManager.PlaySFX(_audioManager._jump);
         _visuPlayer.RotationDown();
         _currentPositionZ -= _movement;
         ApplyZPosition();
-        _echo.InvokeEchoMoveDown();
+        _echo.InvokeEchoMoveDown(transform.position);
         transform.SetParent(null);
-        _echo.InvokeEchoStopSlide();
+        //_playerSpeed = 0;
+        _echo.InvokeEchoStopSlide(transform.position);
     }
     private void ApplyXPosition()
     {
@@ -360,7 +386,6 @@ public class Character : MonoBehaviour
         newPosition.x = _currentPositionX;
         _transform.position = newPosition;
     }
-
     private void ApplyZPosition()
     {
         Vector3 newPosition = transform.position;
@@ -391,5 +416,18 @@ public class Character : MonoBehaviour
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.back) * 1, Color.red);
         Debug.DrawRay(new Vector3(transform.position.x + 0.45f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
         Debug.DrawRay(new Vector3(transform.position.x - 0.45f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
+    }
+    private void DestroyPlayer()
+    {
+        Destroy(gameObject);
+    }
+    private void GameOver()
+    {
+        _faildedPauseMenu._failedMenu.SetActive(true);
+        _groundGenerator._truckSfx.mute = true;
+        _groundGenerator._forestSfx.mute = true;
+        _groundGenerator._futurAmbianceSfx.mute = true;
+        _groundGenerator._snowStormSfx.mute = true;
+        _groundGenerator._riverSfx.mute = true;
     }
 }

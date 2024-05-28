@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FailedPauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject _failedMenu;
+    public GameObject _failedMenu;
     [SerializeField] private GameObject _pauseMenu;
 
     public void GameOver()
