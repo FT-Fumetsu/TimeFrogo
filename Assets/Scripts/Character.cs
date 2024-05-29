@@ -58,6 +58,7 @@ public class Character : MonoBehaviour
         _playerSpeed = 0;
         _buttonMenu.UnPause();
         _paused = false;
+        _graphics.SetParent(null);
     }
     private void Update()
     {
@@ -304,7 +305,6 @@ public class Character : MonoBehaviour
 
             if (collision.gameObject.tag == "IceBlockL")
             {
-                //_playerSpeed = _speed;
                 _echo.InvokeEchoSlideNeg();
             }
             else if (collision.gameObject.tag == "IceBlockR")
@@ -389,15 +389,15 @@ public class Character : MonoBehaviour
         newPosition.x = _currentPositionX;
         _transform.position = newPosition;
 
-        //PlayMovementTween(newPosition);
+        PlayMovementTween(newPosition);
     }
     private void ApplyZPosition()
     {
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
-
-        //PlayMovementTween(newPosition);
         _transform.position = newPosition;
+
+        PlayMovementTween(newPosition);
     }
     public void SpawnGround()
     {

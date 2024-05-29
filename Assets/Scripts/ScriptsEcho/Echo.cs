@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Echo : MonoBehaviour
     [SerializeField] private Transform _transform = null;
     [SerializeField] private EchoTimes _echoTimes;
     [SerializeField] private Vehicle _vehicle;
+    [SerializeField] private Transform _graphics = null;
 
     [Header("Balancing")]
     [SerializeField] private float _movement = 1f;
@@ -20,11 +22,14 @@ public class Echo : MonoBehaviour
     private float _currentPositionX = 0.0f;
     private float _currentPositionZ = 0.0f;
 
+    private Tween _movementTween = null;
+
     private List<Vector3> _exitPlatformPosition = new List<Vector3>();
 
     private void Start()
     {
         _echoSpeed = 0;
+        _graphics.SetParent(null);
     }
     private void Update()
     {
@@ -48,7 +53,7 @@ public class Echo : MonoBehaviour
     }
     public void InvokeEchoSlideNeg()
     {
-        Invoke("EchoSlideNeg", _echoTimes._timeBeforeMove);
+        Invoke(nameof(EchoSlideNeg), _echoTimes._timeBeforeMove);
     }
     public void InvokeEchoStopSlide(Vector3 nextPlayerPos) 
     {
@@ -62,7 +67,7 @@ public class Echo : MonoBehaviour
 
     public void InvokeEchoSlide()
     {
-        Invoke("EchoSlide", _echoTimes._timeBeforeMove);
+        Invoke(nameof(EchoSlide), _echoTimes._timeBeforeMove);
     }
     public void EchoSlide()
     {
@@ -146,6 +151,8 @@ public class Echo : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.x = _currentPositionX;
         _transform.position = newPosition;
+
+        PlayMovementTween(newPosition);
     }
 
     private void ApplyZPosition()
@@ -153,10 +160,23 @@ public class Echo : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
         _transform.position = newPosition;
+
+        PlayMovementTween(newPosition);
     }
 
     public void AddExitPlatformPosition(Vector3 position)
     {
         _exitPlatformPosition.Add(position);
+    }
+    private void PlayMovementTween(Vector3 newPosition)
+    {
+        _movementTween?.Kill();
+        _graphics.DOMove(newPosition, .1f).SetEase(Ease.InOutBack);
+        Transform graphics = _graphics.GetChild(0);
+        Sequence s = DOTween.Sequence();
+        s.Append(graphics.DOMoveY(2f, .05f).SetEase(Ease.OutQuint));
+        s.Append(graphics.DOMoveY(1f, .05f).SetEase(Ease.OutBounce));
+        s.Play();
+        _movementTween.Play();
     }
 }
