@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -36,6 +37,8 @@ public class Character : MonoBehaviour
     [SerializeField] private KeyCode _escape = KeyCode.Escape;
     [SerializeField] private float _speed;
 
+    [SerializeField] private Transform _graphics = null;
+
     private float _playerSpeed;
     public bool _paused;
     float _score = 0;
@@ -46,6 +49,8 @@ public class Character : MonoBehaviour
     private float xpos;
     private Collider _lastIcePlatform = null;
     private GameObject _currentIcePlatform = null;
+
+    private Tween _movementTween = null;
 
     private void Start()
     {
@@ -304,7 +309,6 @@ public class Character : MonoBehaviour
             }
             else if (collision.gameObject.tag == "IceBlockR")
             {
-                //_playerSpeed = -_speed;
                 _echo.InvokeEchoSlide();
             }            
         }
@@ -330,7 +334,6 @@ public class Character : MonoBehaviour
             _lastIcePlatform.enabled = false;
         }
         transform.SetParent(null);
-        //_playerSpeed = 0;
         _echo.InvokeEchoStopSlide(transform.position);
     }
     public void MoveLeft()
@@ -385,11 +388,15 @@ public class Character : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.x = _currentPositionX;
         _transform.position = newPosition;
+
+        //PlayMovementTween(newPosition);
     }
     private void ApplyZPosition()
     {
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
+
+        //PlayMovementTween(newPosition);
         _transform.position = newPosition;
     }
     public void SpawnGround()
@@ -429,5 +436,23 @@ public class Character : MonoBehaviour
         _groundGenerator._futurAmbianceSfx.mute = true;
         _groundGenerator._snowStormSfx.mute = true;
         _groundGenerator._riverSfx.mute = true;
+    }
+
+    private void PlayMovementTween(Vector3 newPosition)
+    {
+        _movementTween?.Kill();
+        _graphics.DOMove(newPosition, .1f).SetEase(Ease.InOutBack);
+        Transform graphics = _graphics.GetChild(0);
+        Sequence s = DOTween.Sequence();
+        s.Append(graphics.DOMoveY(2f, .05f).SetEase(Ease.OutQuint));
+        s.Append(graphics.DOMoveY(1f, .05f).SetEase(Ease.OutBounce));
+        s.Play();
+        _movementTween.Play();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawCube(transform.position, GetComponent<BoxCollider>().size);
     }
 }
