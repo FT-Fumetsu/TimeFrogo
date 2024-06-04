@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3111928409041993262, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.251
+      value: -0.249
       objectReference: {fileID: 0}
     - target: {fileID: 3111928409041993262, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: m_LocalPosition.z
@@ -193,7 +193,7 @@ PrefabInstance:
     - target: {fileID: 3658077143384857035, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: _vehicle
       value: 
-      objectReference: {fileID: 4171277080815684881, guid: 055afdb4824217147903cdae98b03af2, type: 3}
+      objectReference: {fileID: 195495540426690207, guid: b644540360e538f4bbcbcb997f741cb0, type: 3}
     - target: {fileID: 6982023648187824670, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: m_Name
       value: VehicleSpawner

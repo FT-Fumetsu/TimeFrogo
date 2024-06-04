@@ -12,7 +12,7 @@ public class Vehicle : MonoBehaviour
     {
         if (transform.position.x > 0)
         {
-            _speed = -(_speed);
+            transform.rotation = Quaternion.LookRotation(Vector3.back);
         }
     }
 

@@ -29,7 +29,7 @@ public class Echo : MonoBehaviour
     private void Start()
     {
         _echoSpeed = 0;
-        _graphics.SetParent(null);
+        //_graphics.SetParent(null);
     }
     private void Update()
     {
@@ -52,7 +52,7 @@ public class Echo : MonoBehaviour
         Invoke(nameof(EchoMoveRight), _echoTimes._timeBeforeMove);
     }
     public void InvokeEchoSlideNeg()
-    {
+    {        
         Invoke(nameof(EchoSlideNeg), _echoTimes._timeBeforeMove);
     }
     public void InvokeEchoStopSlide(Vector3 nextPlayerPos) 
@@ -66,15 +66,17 @@ public class Echo : MonoBehaviour
     }
 
     public void InvokeEchoSlide()
-    {
+    {        
         Invoke(nameof(EchoSlide), _echoTimes._timeBeforeMove);
     }
     public void EchoSlide()
     {
+        Debug.Log("EchoSlide");
         _echoSpeed = -_speed;
     }
     public void EchoSlideNeg()
     {
+        Debug.Log("EchoSlideNeg");
         _echoSpeed = _speed;
     }
 
