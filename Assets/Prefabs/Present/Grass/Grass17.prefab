@@ -844,6 +844,7 @@ GameObject:
   - component: {fileID: 6510167611472832038}
   - component: {fileID: 5149187637774721080}
   - component: {fileID: 7184976974533449339}
+  - component: {fileID: 8034824696073636300}
   m_Layer: 0
   m_Name: Grass17
   m_TagString: Untagged
@@ -917,3 +918,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8034824696073636300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8484389861654588959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6d4d34770c1a64986c24bcc798402b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _treeSpawnerPrefab: {fileID: 5633597444968198148, guid: 198eea747d836494e8b0127e7c053e82, type: 3}
+  _wallCount: 2

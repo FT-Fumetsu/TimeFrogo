@@ -22,6 +22,9 @@ public class GroundSpawn : MonoBehaviour
     public AudioSource _snowStormSfx;
     [SerializeField] private AudioSource _audioFutur;
     public AudioSource _futurAmbianceSfx;
+    [SerializeField] private GroundData _presentDefaultGround = null;
+    [SerializeField] private GroundData _pastDefaultGround = null;
+    [SerializeField] private GroundData _futurDefaultGround = null;
 
     [Header("Balancing")]
     private int actualList=0;
@@ -39,8 +42,12 @@ public class GroundSpawn : MonoBehaviour
 
     private GroundData lastGroundData = null;
     private GroundData nextGroundData = null;
+    private GroundData _defaultGround = null;
+
+    private int _consecutiveObstacleCount = 0;
     private void Start()
     {
+        _defaultGround = _presentDefaultGround;
         _isAlive = true;
         actualList = 0;
         _choixList = _groundDatasPresent;
@@ -98,8 +105,30 @@ public class GroundSpawn : MonoBehaviour
                 groundInSuccession = Random.Range(1, _choixList[whichTerrain]._maxInSuccesion);
             }           
         }
-        lastGroundData = _choixList[whichTerrain];      
+        lastGroundData = _choixList[whichTerrain];
+        
         GameObject ground = Instantiate(nextGroundData.ground, _currentPosition, Quaternion.identity);
+
+        if(ground.TryGetComponent(out Chunk chunk))
+        {
+            if(chunk.WallCount == 0)
+            {
+                _consecutiveObstacleCount = 0;
+            }
+
+            _consecutiveObstacleCount += chunk.WallCount;
+
+            if(_consecutiveObstacleCount > 6)
+            {
+                Destroy(ground);
+                ground = Instantiate(_defaultGround.ground, _currentPosition, Quaternion.identity);
+
+                Debug.LogError("REPLACE SOFT LOCK !");
+
+                _consecutiveObstacleCount = 0;
+            }
+        }
+
         _currentGround.Add(ground);
         if (_currentGround.Count > _maxGroundCount)
         {
@@ -128,9 +157,9 @@ public class GroundSpawn : MonoBehaviour
                 StopFuturMusic();
                 PlayPresentMusic();
                 _chronoChangeBiome = 0;
-                //actualList = Random.Range(0, 1);
                 actualList = 0;
                 _choixList = _groundDatasPresent;
+                _defaultGround = _presentDefaultGround;
             }
         }
         if (_chronoChangeBiome >= _changeBiome)
@@ -138,10 +167,11 @@ public class GroundSpawn : MonoBehaviour
             if (actualList == 1)
             {
                 StopPastMusic();
-                PlayPresentMusic();
+                PlayFuturMusic();
                 _chronoChangeBiome = 0;
-                actualList = 0;
-                _choixList = _groundDatasPresent;
+                actualList = 2;
+                _choixList = _groundDatasFutur;
+                _defaultGround = _futurDefaultGround;
             }
         }
         if (_chronoChangeBiome >= _changeBiome)
@@ -151,9 +181,9 @@ public class GroundSpawn : MonoBehaviour
                 StopPresentMusic();
                 PlayPastMusic();
                 _chronoChangeBiome = 0;
-                //actualList = Random.Range(1, 2);
                 actualList = 1;
                 _choixList = _groundDatasPast;
+                _defaultGround = _pastDefaultGround;
             }
         }
     }

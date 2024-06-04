@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 3639645636561285426}
   - component: {fileID: 6543805273134351975}
   - component: {fileID: 1610001568128924860}
+  - component: {fileID: -2269225542818871741}
   m_Layer: 0
   m_Name: Grass10
   m_TagString: Untagged
@@ -332,6 +333,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-2269225542818871741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416484103382830007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6d4d34770c1a64986c24bcc798402b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _treeSpawnerPrefab: {fileID: 5633597444968198148, guid: 198eea747d836494e8b0127e7c053e82, type: 3}
+  _wallCount: 2
 --- !u!1 &4326848241473541909
 GameObject:
   m_ObjectHideFlags: 0
