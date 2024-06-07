@@ -25,6 +25,9 @@ public class GroundSpawn : MonoBehaviour
     [SerializeField] private GroundData _presentDefaultGround = null;
     [SerializeField] private GroundData _pastDefaultGround = null;
     [SerializeField] private GroundData _futurDefaultGround = null;
+    [SerializeField] private GameObject _lightPresent;
+    [SerializeField] private GameObject _lightPast;
+    [SerializeField] private GameObject _lightFutur;
 
     [Header("Balancing")]
     private int actualList=0;
@@ -47,13 +50,13 @@ public class GroundSpawn : MonoBehaviour
     private int _consecutiveObstacleCount = 0;
     private void Start()
     {
-        _defaultGround = _presentDefaultGround;
+        _defaultGround = _pastDefaultGround;
         _isAlive = true;
-        actualList = 0;
-        _choixList = _groundDatasPresent;
+        actualList = 1;
+        _choixList = _groundDatasPast;
         SafeSpawnStart();
-        PlayPresentMusic();
-        StopPastMusic();
+        PlayPastMusic();
+        StopPresentMusic();
         StopFuturMusic();
     }
     private void Update()
@@ -150,11 +153,23 @@ public class GroundSpawn : MonoBehaviour
 
     private void ChangeBiome()
     {
-        if (_chronoChangeBiome >= _changeBiome) //3 fois le if car sinon, si on passe du passé au futur, on passe instantanément du futur au présent.
+        if (_chronoChangeBiome >= _changeBiome)
         {
             if (actualList == 2)
             {
                 StopFuturMusic();
+                PlayPastMusic();
+                _chronoChangeBiome = 0;
+                actualList = 1;
+                _choixList = _groundDatasPast;
+                _defaultGround = _pastDefaultGround;
+            }
+        }
+        if (_chronoChangeBiome >= _changeBiome)
+        {
+            if (actualList == 1)
+            {
+                StopPastMusic();
                 PlayPresentMusic();
                 _chronoChangeBiome = 0;
                 actualList = 0;
@@ -164,9 +179,9 @@ public class GroundSpawn : MonoBehaviour
         }
         if (_chronoChangeBiome >= _changeBiome)
         {
-            if (actualList == 1)
+            if (actualList == 0)
             {
-                StopPastMusic();
+                StopPresentMusic();
                 PlayFuturMusic();
                 _chronoChangeBiome = 0;
                 actualList = 2;
@@ -174,33 +189,30 @@ public class GroundSpawn : MonoBehaviour
                 _defaultGround = _futurDefaultGround;
             }
         }
-        if (_chronoChangeBiome >= _changeBiome)
-        {
-            if (actualList == 0)
-            {
-                StopPresentMusic();
-                PlayPastMusic();
-                _chronoChangeBiome = 0;
-                actualList = 1;
-                _choixList = _groundDatasPast;
-                _defaultGround = _pastDefaultGround;
-            }
-        }
     }
     private void PlayPresentMusic()
     {
+        _lightPresent.SetActive(true);
+        _lightPast.SetActive(false);
+        _lightFutur.SetActive(false);
         _audioPresent.mute = false;
         _forestSfx.mute = false;
         _truckSfx.mute = false;
     }
     private void PlayPastMusic()
     {
+        _lightPresent.SetActive(false);
+        _lightPast.SetActive(true);
+        _lightFutur.SetActive(false);
         _audioPast.mute = false;
         _snowStormSfx.mute = false;
         _riverSfx.mute = false;
     }
     private void PlayFuturMusic()
     {
+        _lightPresent.SetActive(false);
+        _lightPast.SetActive(false);
+        _lightFutur.SetActive(true);
         _audioFutur.mute = false;
         _futurAmbianceSfx.mute = false;
     }

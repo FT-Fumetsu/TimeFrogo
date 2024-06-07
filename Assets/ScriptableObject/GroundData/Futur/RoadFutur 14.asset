@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00618237ae31dcb4db6e799a6f718a01, type: 3}
   m_Name: RoadFutur 14
   m_EditorClassIdentifier: 
-  ground: {fileID: 0}
-  _maxInSuccesion: 0
+  ground: {fileID: 4239640742398738289, guid: 3f5e92847eca5424ca61ba684db7af8f, type: 3}
+  _maxInSuccesion: 1

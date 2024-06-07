@@ -104,9 +104,10 @@ public class Character : MonoBehaviour
             _groundSpawn._isAlive = false;
             DestroyPlayer();
         }
-        else if (other.gameObject.tag == "CrackedIce" || other.gameObject.tag == "Laser")
+        else if (other.gameObject.tag == "Laser")
         {
             GameOver();
+            _audioManager.PlaySFX(_audioManager._laserShot);
             _groundSpawn._isAlive = false;
             Destroy(gameObject);
         }

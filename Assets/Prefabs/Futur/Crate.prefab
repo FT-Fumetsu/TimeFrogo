@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e15d88a1f15a98e4b81b23da14466bf8, type: 3}
+      propertyPath: m_TagString
+      value: Crate
+      objectReference: {fileID: 0}
     - target: {fileID: 4407187375235809858, guid: e15d88a1f15a98e4b81b23da14466bf8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
