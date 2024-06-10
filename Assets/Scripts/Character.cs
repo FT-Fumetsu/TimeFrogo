@@ -151,20 +151,20 @@ public class Character : MonoBehaviour
     private void DrawRaycasts()
     {
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x + .425f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x - .425f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward) * 1, Color.red);
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z + .425f), transform.TransformDirection(Vector3.right) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z - .425f), transform.TransformDirection(Vector3.right) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.right) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.right) * 1, Color.red);
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z + .425f), transform.TransformDirection(Vector3.left) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z - .425f), transform.TransformDirection(Vector3.left) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.left) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.left) * 1, Color.red);
 
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.back) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x + .425f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x - .425f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
     }
     private void DestroyPlayer()
     {
