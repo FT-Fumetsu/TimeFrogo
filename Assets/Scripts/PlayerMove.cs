@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -40,77 +42,7 @@ public class PlayerMove : MonoBehaviour
     {
         _chrono += Time.deltaTime;
         RaycastHit hit;
-        if (Input.GetKeyDown(_leftKey) && _chrono > _inputTimer)
-        {
-            _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.left), out hit, 1))
-            {
-                if (hit.transform.tag == "Obstacles")
-                {
-                    return;
-                }
-            }
-            else
-            {
-                MoveLeft();
-            }
-        }
 
-        if (Input.GetKeyDown(_rightKey) && _chrono > _inputTimer)
-        {
-            _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.right), out hit, 1))
-            {
-                if (hit.transform.tag == "Obstacles")
-                {
-                    Debug.Log(hit.transform.name + " right");
-                }
-            }
-            else
-            {
-                MoveRight();
-            }
-        }
-
-        if (Input.GetKeyDown(_upKey) && _chrono > _inputTimer)
-        {
-            _chrono = 0;
-            if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
-            {
-                if (hit.transform.tag == "Obstacles")
-                {
-                    Debug.Log(hit.transform.name + "up");
-                }
-            }
-            else
-            {
-                MoveUp();
-                if (_currentPositionZ <= _maxPositionZReach)
-                {
-                    return;
-                }
-                else
-                {
-                    SpawnGround();
-                }
-            }
-        }
-
-        if (Input.GetKeyDown(_downKey) && _chrono > _inputTimer)
-        {
-            _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1))
-            {
-                if (hit.transform.tag == "Obstacles")
-                {
-                    return;
-                }
-            }
-            else
-            {
-                MoveDown();
-            }
-        }
         if (Input.GetKey(_leftKey) && _chrono > _getKeyTimer)
         {
             _chrono = 0;
@@ -119,6 +51,14 @@ public class PlayerMove : MonoBehaviour
                 if (hit.transform.tag == "Obstacles")
                 {
                     return;
+                }
+                else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
+                {
+                    MoveLeft();
+                }
+                else if (hit.transform.tag == "Fall")
+                {
+                    MoveLeft();
                 }
             }
             else
@@ -136,6 +76,14 @@ public class PlayerMove : MonoBehaviour
                 {
                     Debug.Log(hit.transform.name + " right");
                 }
+                else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
+                {
+                    MoveRight();
+                }
+                else if (hit.transform.tag == "Fall")
+                {
+                    MoveRight();
+                }
             }
             else
             {
@@ -151,6 +99,30 @@ public class PlayerMove : MonoBehaviour
                 if (hit.transform.tag == "Obstacles")
                 {
                     Debug.Log(hit.transform.name + "up");
+                }
+                else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
+                {
+                    MoveUp();
+                    if (_currentPositionZ <= _maxPositionZReach)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        SpawnGround();
+                    }
+                }
+                else if (hit.transform.tag == "Fall")
+                {
+                    MoveUp();
+                    if (_currentPositionZ <= _maxPositionZReach)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        SpawnGround();
+                    }
                 }
             }
             else
@@ -177,6 +149,14 @@ public class PlayerMove : MonoBehaviour
                     return;
                 }
             }
+            else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
+            {
+                MoveDown();
+            }
+            else if (hit.transform.tag == "Fall")
+            {
+                MoveDown();
+            }
             else
             {
                 MoveDown();
@@ -185,9 +165,158 @@ public class PlayerMove : MonoBehaviour
         _textScore.SetText("Score : " + _score.ToString());
     }
 
-    private void PlayerMoveUp()
+    public void PlayerMoveUp(CallbackContext callbackContext)
     {
+        if(callbackContext.phase != InputActionPhase.Started)
+        {
+            return;
+        }
 
+        RaycastHit hit;
+        if (_chrono > _inputTimer)
+        {
+            Debug.Log("Forward");
+            _chrono = 0;
+            if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
+            {
+                if (hit.transform.tag == "Obstacles")
+                {
+                    Debug.Log(hit.transform.name + "up");
+                }
+                else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
+                {
+                    MoveUp();
+                    if (_currentPositionZ <= _maxPositionZReach)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        SpawnGround();
+                    }
+                }
+                else if (hit.transform.tag == "Fall")
+                {
+                    MoveUp();
+                    if (_currentPositionZ <= _maxPositionZReach)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        SpawnGround();
+                    }
+                }
+            }
+            else
+            {
+                MoveUp();
+                if (_currentPositionZ <= _maxPositionZReach)
+                {
+                    return;
+                }
+                else
+                {
+                    SpawnGround();
+                }
+            }
+        }
+    }
+    public void PlayerMoveDown(CallbackContext callbackContext)
+    {
+        if (callbackContext.phase != InputActionPhase.Started)
+        {
+            return;
+        }
+
+        RaycastHit hit;
+        if (_chrono > _inputTimer)
+        {
+            _chrono = 0;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1))
+            {
+                if (hit.transform.tag == "Obstacles")
+                {
+                    return;
+                }
+                else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
+                {
+                    MoveDown();
+                }
+                else if (hit.transform.tag == "Fall")
+                {
+                    MoveDown();
+                }
+            }
+            else
+            {
+                MoveDown();
+            }
+        }
+    }
+    public void PlayerMoveLeft(CallbackContext callbackContext)
+    {
+        if (callbackContext.phase != InputActionPhase.Started)
+        {
+            return;
+        }
+
+        RaycastHit hit;
+        if (_chrono > _inputTimer)
+        {
+            _chrono = 0;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.left), out hit, 1))
+            {
+                if (hit.transform.tag == "Obstacles")
+                {
+                    return;
+                }
+                else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
+                {
+                    MoveLeft();
+                }
+                else if (hit.transform.tag == "Fall")
+                {
+                    MoveLeft();
+                }
+            }
+            else
+            {
+                MoveLeft();
+            }
+        }
+    }
+    public void PlayerMoveRight(CallbackContext callbackContext)
+    {
+        if (callbackContext.phase != InputActionPhase.Started)
+        {
+            return;
+        }
+
+        RaycastHit hit;
+        if (_chrono > _inputTimer)
+        {
+            _chrono = 0;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.right), out hit, 1))
+            {
+                if (hit.transform.tag == "Obstacles")
+                {
+                    Debug.Log(hit.transform.name + " right");
+                }
+                else if (hit.transform.tag == "Fall" &&  hit.transform.tag == "DontFall")
+                {
+                    MoveRight();
+                }
+                else if (hit.transform.tag == "Fall")
+                {
+                    MoveRight();
+                }
+            }
+            else
+            {
+                MoveRight();
+            }
+        }
     }
     public void MoveRight()
     {
@@ -282,5 +411,12 @@ public class PlayerMove : MonoBehaviour
         _maxPositionZReach = _currentPositionZ;
         _score++;
         _groundSpawn.SpawnGround(transform.position);
+    }
+    public void DontMoveOnIceBlocks()
+    {
+        if (Input.GetKeyDown(_leftKey) || Input.GetKeyDown(_rightKey))
+        {
+            return;
+        }
     }
 }

@@ -71,18 +71,15 @@ public class Echo : MonoBehaviour
     }
     public void EchoSlide()
     {
-        Debug.Log("EchoSlide");
         _echoSpeed = -_speed;
     }
     public void EchoSlideNeg()
     {
-        Debug.Log("EchoSlideNeg");
         _echoSpeed = _speed;
     }
 
     public void ExitPlatform()
     {
-        Debug.Log("EXIT PLATFORM");
         Vector3 fixedPosition = _exitPlatformPosition[0];
         _exitPlatformPosition.RemoveAt(0);
 
@@ -97,8 +94,6 @@ public class Echo : MonoBehaviour
         Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
         transform.position = pos;
         _currentPositionX = roundXPos;
-
-        Debug.Log("1");
     }
 
 

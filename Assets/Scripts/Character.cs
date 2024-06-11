@@ -133,6 +133,7 @@ public class Character : MonoBehaviour
         {
             //_graphics.transform.SetParent(collision.transform);
             transform.SetParent(collision.transform);
+            transform.localPosition = Vector3.zero;
             _currentIcePlatform = collision.gameObject;
             _lastIcePlatform = collision.collider;
 
@@ -143,7 +144,8 @@ public class Character : MonoBehaviour
             else if (collision.gameObject.tag == "IceBlockR")
             {                
                 _echo.InvokeEchoSlide();
-            }            
+            }
+            _playerMove.DontMoveOnIceBlocks();
         }
     }
   

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,7 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] private Vector3 _offset;
     [SerializeField] private float _smoothSpeed;
     private float _currentPositionZ = 0.0f;
+    private Tween _movementTween = null;
 
     private void Start()
     {
@@ -54,10 +56,15 @@ public class FollowPlayer : MonoBehaviour
 
         _transform.position = newPosition;
     }
-    //public void SmoothedCamera()
-    //{
-    //    Vector3 desiredPosition = _player.position + _offset;
-    //    Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed);
-    //    transform.position = smoothedPosition;
-    //}
+    public void PlayMovementTween(Vector3 newPosition)
+    {
+        _movementTween?.Kill();
+        _transform.DOMove(newPosition, .1f).SetEase(Ease.InOutBack);
+        Transform graphics = _transform.GetChild(0);
+        Sequence s = DOTween.Sequence();
+        s.Append(graphics.DOMoveY(2f, .05f).SetEase(Ease.OutQuint));
+        s.Append(graphics.DOMoveY(1f, .05f).SetEase(Ease.OutBounce));
+        s.Play();
+        _movementTween.Play();
+    }
 }
