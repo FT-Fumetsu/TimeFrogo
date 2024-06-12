@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Character : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private Character _player;
     [SerializeField] private GroundSpawn _groundSpawn;
     [SerializeField] private Echo _echo;
     [SerializeField] private RestartQuit _buttonMenu;
@@ -38,9 +39,6 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(Vector3.right * _playerSpeed * Time.deltaTime);
-        DrawRaycasts();
-
         _graphics.transform.localPosition = Vector3.zero;
         if (_paused == true)
         {
@@ -133,7 +131,7 @@ public class Character : MonoBehaviour
         {
             //_graphics.transform.SetParent(collision.transform);
             transform.SetParent(collision.transform);
-            transform.localPosition = Vector3.zero;
+            //transform.localPosition = Vector3.zero;
             _currentIcePlatform = collision.gameObject;
             _lastIcePlatform = collision.collider;
 

@@ -325,9 +325,9 @@ MonoBehaviour:
   _presentDefaultGround: {fileID: 11400000, guid: 988ca5b9ca5695b4eb73f855191a99d3, type: 2}
   _pastDefaultGround: {fileID: 11400000, guid: c314d9196a1d0df4396e0fcadedb4c2b, type: 2}
   _futurDefaultGround: {fileID: 11400000, guid: aae48d88959059a478a844d7ac9a370e, type: 2}
-  _lightPresent: {fileID: 0}
-  _lightPast: {fileID: 0}
-  _lightFutur: {fileID: 0}
+  _lightPresent: {fileID: 705507993}
+  _lightPast: {fileID: 625374181}
+  _lightFutur: {fileID: 267749493}
   _currentPosition: {x: 0, y: 0, z: 0}
   _maxGroundCount: 60
   _startSpawnCount: 25
@@ -593,7 +593,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -1830,6 +1830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21efc89811046b8458197ca0c9addd32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1649437650}
   _failedMenu: {fileID: 1446208480}
   _pauseMenu: {fileID: 286381473}
 --- !u!1 &830313739
@@ -1861,7 +1862,7 @@ Transform:
   m_GameObject: {fileID: 830313739}
   serializedVersion: 2
   m_LocalRotation: {x: -0.31805646, y: -0.109039955, z: -0.69864887, w: 0.631538}
-  m_LocalPosition: {x: 5, y: -3.0600004, z: 10.789997}
+  m_LocalPosition: {x: 4.29, y: -4.35, z: 8.99}
   m_LocalScale: {x: 11, y: 1, z: 13}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1913,8 +1914,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 41.153202, z: 1}
+  m_Center: {x: 0.00000009322279, y: 20.076607, z: -0.000000021856241}
 --- !u!23 &830313743
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2012,7 +2013,7 @@ AudioSource:
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -2140,7 +2141,7 @@ AudioSource:
   m_Volume: 0.9
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -4432,7 +4433,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -4959,8 +4960,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 22.164925, z: 1}
+  m_Center: {x: -0.00000004913813, y: -10.582465, z: 0.000000011520516}
 --- !u!23 &1562149940
 MeshRenderer:
   m_ObjectHideFlags: 0

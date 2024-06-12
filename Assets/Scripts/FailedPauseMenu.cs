@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FailedPauseMenu : MonoBehaviour
 {
+    [SerializeField] private Character _player;
     public GameObject _failedMenu;
     [SerializeField] private GameObject _pauseMenu;
 
+    private void Update()
+    {
+        if(_player = null)
+        {
+            GameOver();
+        }
+    }
     public void GameOver()
     {
         _failedMenu.SetActive(true);

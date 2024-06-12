@@ -91,53 +91,53 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(_upKey) && _chrono > _getKeyTimer)
-        {
-            _chrono = 0;
-            if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
-            {
-                if (hit.transform.tag == "Obstacles")
-                {
-                    Debug.Log(hit.transform.name + "up");
-                }
-                else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
-                {
-                    MoveUp();
-                    if (_currentPositionZ <= _maxPositionZReach)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        SpawnGround();
-                    }
-                }
-                else if (hit.transform.tag == "Fall")
-                {
-                    MoveUp();
-                    if (_currentPositionZ <= _maxPositionZReach)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        SpawnGround();
-                    }
-                }
-            }
-            else
-            {
-                MoveUp();
-                if (_currentPositionZ <= _maxPositionZReach)
-                {
-                    return;
-                }
-                else
-                {
-                    SpawnGround();
-                }
-            }
-        }
+        //if (Input.GetKey(_upKey) && _chrono > _getKeyTimer)
+        //{
+        //    _chrono = 0;
+        //    if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
+        //    {
+        //        if (hit.transform.tag == "Obstacles")
+        //        {
+        //            Debug.Log(hit.transform.name + "up");
+        //        }
+        //        else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
+        //        {
+        //            MoveUp();
+        //            if (_currentPositionZ <= _maxPositionZReach)
+        //            {
+        //                return;
+        //            }
+        //            else
+        //            {
+        //                SpawnGround();
+        //            }
+        //        }
+        //        else if (hit.transform.tag == "Fall")
+        //        {
+        //            MoveUp();
+        //            if (_currentPositionZ <= _maxPositionZReach)
+        //            {
+        //                return;
+        //            }
+        //            else
+        //            {
+        //                SpawnGround();
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MoveUp();
+        //        if (_currentPositionZ <= _maxPositionZReach)
+        //        {
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            SpawnGround();
+        //        }
+        //    }
+        //}
 
         if (Input.GetKey(_downKey) && _chrono > _getKeyTimer)
         {
@@ -175,6 +175,7 @@ public class PlayerMove : MonoBehaviour
         RaycastHit hit;
         if (_chrono > _inputTimer)
         {
+            Debug.Log("Performed");
             Debug.Log("Forward");
             _chrono = 0;
             if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
