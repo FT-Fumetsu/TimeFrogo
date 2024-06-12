@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass Variant 25
       objectReference: {fileID: 0}
+    - target: {fileID: 8230035189099340609, guid: 7d71ce7c73df1bb4fbff53b6d0aa0da4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -418,7 +418,7 @@ MonoBehaviour:
   - {fileID: 137287734059777811, guid: 58ea7d836b3e09a40ad56633be2b20c5, type: 3}
   - {fileID: 5485710651948186260, guid: 18f3c30731392cf41a188879f647d8a4, type: 3}
   - {fileID: 203173728935316142, guid: 7495ae1ea15f800429d29fc10a8057bb, type: 3}
-  _offsetPosition: 0.2
+  _offsetPosition: 0.1
   _offsetRotation: 180
   _offsetScale: 0.5
 --- !u!1 &8169537303890774086

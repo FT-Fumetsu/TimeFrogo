@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 683330796701738203, guid: 7abcafb9904dbab47b4da8f1ba157016, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5076983640733482208, guid: 7abcafb9904dbab47b4da8f1ba157016, type: 3}
       propertyPath: m_Name
       value: Grass Variant 26

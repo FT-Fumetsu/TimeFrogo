@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: _wallCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6720323047319468012, guid: 4707f09c953ecac468b60e2882550ac8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4159955205550037413, guid: 4707f09c953ecac468b60e2882550ac8, type: 3}

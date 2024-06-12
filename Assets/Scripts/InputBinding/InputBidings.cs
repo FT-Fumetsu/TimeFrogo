@@ -28,7 +28,7 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
             ""id"": ""af8c999a-773f-4e90-90cd-5f18e9acc5f4"",
             ""actions"": [
                 {
-                    ""name"": ""Up"",
+                    ""name"": ""Forward"",
                     ""type"": ""Button"",
                     ""id"": ""67faaacc-0d6d-4c97-b453-4f8d74b3abc7"",
                     ""expectedControlType"": ""Button"",
@@ -37,7 +37,7 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Down"",
+                    ""name"": ""Back"",
                     ""type"": ""Button"",
                     ""id"": ""9d6179c0-6fbc-4e82-bdcb-2483faa0b425"",
                     ""expectedControlType"": ""Button"",
@@ -81,7 +81,7 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Up"",
+                    ""action"": ""Forward"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -92,7 +92,7 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Down"",
+                    ""action"": ""Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -148,8 +148,8 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Up = m_Player.FindAction("Up", throwIfNotFound: true);
-        m_Player_Down = m_Player.FindAction("Down", throwIfNotFound: true);
+        m_Player_Forward = m_Player.FindAction("Forward", throwIfNotFound: true);
+        m_Player_Back = m_Player.FindAction("Back", throwIfNotFound: true);
         m_Player_Left = m_Player.FindAction("Left", throwIfNotFound: true);
         m_Player_Right = m_Player.FindAction("Right", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
@@ -214,8 +214,8 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Up;
-    private readonly InputAction m_Player_Down;
+    private readonly InputAction m_Player_Forward;
+    private readonly InputAction m_Player_Back;
     private readonly InputAction m_Player_Left;
     private readonly InputAction m_Player_Right;
     private readonly InputAction m_Player_Pause;
@@ -223,8 +223,8 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
     {
         private @InputBidings m_Wrapper;
         public PlayerActions(@InputBidings wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Up => m_Wrapper.m_Player_Up;
-        public InputAction @Down => m_Wrapper.m_Player_Down;
+        public InputAction @Forward => m_Wrapper.m_Player_Forward;
+        public InputAction @Back => m_Wrapper.m_Player_Back;
         public InputAction @Left => m_Wrapper.m_Player_Left;
         public InputAction @Right => m_Wrapper.m_Player_Right;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
@@ -237,12 +237,12 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @Up.started += instance.OnUp;
-            @Up.performed += instance.OnUp;
-            @Up.canceled += instance.OnUp;
-            @Down.started += instance.OnDown;
-            @Down.performed += instance.OnDown;
-            @Down.canceled += instance.OnDown;
+            @Forward.started += instance.OnForward;
+            @Forward.performed += instance.OnForward;
+            @Forward.canceled += instance.OnForward;
+            @Back.started += instance.OnBack;
+            @Back.performed += instance.OnBack;
+            @Back.canceled += instance.OnBack;
             @Left.started += instance.OnLeft;
             @Left.performed += instance.OnLeft;
             @Left.canceled += instance.OnLeft;
@@ -256,12 +256,12 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Up.started -= instance.OnUp;
-            @Up.performed -= instance.OnUp;
-            @Up.canceled -= instance.OnUp;
-            @Down.started -= instance.OnDown;
-            @Down.performed -= instance.OnDown;
-            @Down.canceled -= instance.OnDown;
+            @Forward.started -= instance.OnForward;
+            @Forward.performed -= instance.OnForward;
+            @Forward.canceled -= instance.OnForward;
+            @Back.started -= instance.OnBack;
+            @Back.performed -= instance.OnBack;
+            @Back.canceled -= instance.OnBack;
             @Left.started -= instance.OnLeft;
             @Left.performed -= instance.OnLeft;
             @Left.canceled -= instance.OnLeft;
@@ -299,8 +299,8 @@ public partial class @InputBidings: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnUp(InputAction.CallbackContext context);
-        void OnDown(InputAction.CallbackContext context);
+        void OnForward(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
