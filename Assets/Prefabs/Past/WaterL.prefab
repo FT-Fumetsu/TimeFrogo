@@ -119,6 +119,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3658077143384857035, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
+      propertyPath: _timer
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658077143384857035, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: _vehicle
       value: 
       objectReference: {fileID: 195495540426690207, guid: 3438afb4bf70d494497b411b9b4bc49c, type: 3}
