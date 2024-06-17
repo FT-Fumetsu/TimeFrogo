@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
 
 public class Character : MonoBehaviour
 {
@@ -17,22 +19,20 @@ public class Character : MonoBehaviour
     [SerializeField] private FailedPauseMenu _failedPauseMenu;
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private PlayerMove _playerMove;
+    [SerializeField] private Animations _animations;
 
     [Header("Balancing")]
-    [SerializeField] private KeyCode _escape = KeyCode.Escape;
     public Transform _graphics = null;
 
-    private float _playerSpeed;
     public bool _paused;
     private Collider _lastIcePlatform = null;
     private GameObject _currentIcePlatform = null;
 
-    private Tween _movementTween = null;
+    //private Tween _movementTween = null;
 
     private void Start()
     {
         _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        _playerSpeed = 0;
         _buttonMenu.UnPause();
         _paused = false;
         //_graphics.SetParent(null);
@@ -49,20 +49,8 @@ public class Character : MonoBehaviour
         {
             _failedPauseMenu.Unpause();
         }
-        
-        
 
-        if (Input.GetKeyDown(_escape) && _paused == false)
-        {
-            _paused = true;
-            Time.timeScale = 0;
-        }
-
-        else if(Input.GetKeyDown(_escape) && _paused == true)
-        {
-            _paused = false;
-            Time.timeScale = 1;
-        }
+        DrawRaycasts();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -91,12 +79,14 @@ public class Character : MonoBehaviour
         }
         else if(other.gameObject.tag == "Echo")
         {
+            //_animations._killEcho = true;
             GameOver();
             _groundSpawn._isAlive = false;
             Destroy(gameObject);
         }
         else if(other.gameObject.tag == "Trapdoor")
         {
+            //_animations._killTrapdoor = true;
             GameOver();
             _audioManager.PlaySFX(_audioManager._fall);
             _groundSpawn._isAlive = false;
@@ -104,6 +94,7 @@ public class Character : MonoBehaviour
         }
         else if (other.gameObject.tag == "Laser")
         {
+            //_animations._killLaser = true;
             GameOver();
             _audioManager.PlaySFX(_audioManager._laserShot);
             _groundSpawn._isAlive = false;
@@ -120,7 +111,6 @@ public class Character : MonoBehaviour
             Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
             transform.position = pos;
             _playerMove._currentPositionX = roundXPos;
-
             _echo.AddExitPlatformPosition(pos);
             _echo.InvokeExitPlatform();
         }
@@ -131,6 +121,7 @@ public class Character : MonoBehaviour
         {
             //_graphics.transform.SetParent(collision.transform);
             transform.SetParent(collision.transform);
+            _playerMove.DontMoveOnIceBlocks();
             //transform.localPosition = Vector3.zero;
             _currentIcePlatform = collision.gameObject;
             _lastIcePlatform = collision.collider;
@@ -143,7 +134,6 @@ public class Character : MonoBehaviour
             {                
                 _echo.InvokeEchoSlide();
             }
-            _playerMove.DontMoveOnIceBlocks();
         }
     }
   
@@ -179,21 +169,39 @@ public class Character : MonoBehaviour
         _groundSpawn._snowStormSfx.mute = true;
         _groundSpawn._riverSfx.mute = true;
     }
-    public void PlayMovementTween(Vector3 newPosition)
-    {
-        _movementTween?.Kill();
-        _graphics.DOMove(newPosition, .1f).SetEase(Ease.InOutBack);
-        Transform graphics = _graphics.GetChild(0);
-        Sequence s = DOTween.Sequence();
-        s.Append(graphics.DOMoveY(2f, .05f).SetEase(Ease.OutQuint));
-        s.Append(graphics.DOMoveY(1f, .05f).SetEase(Ease.OutBounce));
-        s.Play();
-        _movementTween.Play();
-    }
+    //public void PlayMovementTween(Vector3 newPosition)
+    //{
+    //    _movementTween?.Kill();
+    //    _graphics.DOMove(newPosition, .1f).SetEase(Ease.InOutBack);
+    //    Transform graphics = _graphics.GetChild(0);
+    //    Sequence s = DOTween.Sequence();
+    //    s.Append(graphics.DOMoveY(2f, .05f).SetEase(Ease.OutQuint));
+    //    s.Append(graphics.DOMoveY(1f, .05f).SetEase(Ease.OutBounce));
+    //    s.Play();
+    //    _movementTween.Play();
+    //}
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawCube(transform.position, GetComponent<BoxCollider>().size);
+    }
+    public void Escape(CallbackContext callbackContext)
+    {
+        if (callbackContext.phase != InputActionPhase.Started)
+        {
+            return;
+        }
+        if (/*Input.GetKeyDown(_escape) && */_paused == false)
+        {
+            _paused = true;
+            Time.timeScale = 0;
+        }
+
+        else if (/*Input.GetKeyDown(_escape) && */_paused == true)
+        {
+            _paused = false;
+            Time.timeScale = 1;
+        }
     }
 }

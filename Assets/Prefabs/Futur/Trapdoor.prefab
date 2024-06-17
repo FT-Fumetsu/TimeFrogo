@@ -187,6 +187,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d9438fc0532b2ae47b4ae43c741c6fd9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6563194848966103399}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d9438fc0532b2ae47b4ae43c741c6fd9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7165319263481090577}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d9438fc0532b2ae47b4ae43c741c6fd9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2912405907370164082}
   m_SourcePrefab: {fileID: 100100000, guid: d9438fc0532b2ae47b4ae43c741c6fd9, type: 3}
 --- !u!1 &2305851748868821719 stripped
 GameObject:
@@ -214,3 +220,45 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!95 &7165319263481090577
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2305851748868821719}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2b9024a22f1f8ce4795056c0f86a21d7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2912405907370164082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2305851748868821719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe0a5472e1c47644b90a6cc66da1e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _froggo: {fileID: 0}
+  _echo: {fileID: 0}
+  _laserFroggo: {fileID: 0}
+  _trapdoor: {fileID: 7165319263481090577}
+  _jumpFroggo: 0
+  _echoJump: 0
+  _killLaser: 0
+  _killTrapdoor: 0
+  _killEcho: 0

@@ -6,23 +6,27 @@ public class EchoSpawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject _echo;
+    [SerializeField] private GameObject _echoSfx;
     [SerializeField] private Transform _echoSpawner;
 
     [Header("Balancing")]
     public float _timeBeforeSpawn = 2.4f;
 
-
     private void Start()
     {
+        _echoSfx.SetActive(false);
         _echo.SetActive(false);
-        //Instantiate(_echo);
         InvokeEcho();
+        InvokeEchoSfx();
     }
 
     public void SpawnEcho()
     {
-        //Instantiate(_echo);
         _echo.SetActive(true);
+    }
+    public void SpawnEchoSfx()
+    {
+        _echoSfx.SetActive(true);
     }
     public void DispawnEcho()
     {
@@ -30,6 +34,10 @@ public class EchoSpawner : MonoBehaviour
     }
     public void InvokeEcho()
     {
-        Invoke("SpawnEcho", _timeBeforeSpawn);
+        Invoke(nameof(SpawnEcho), _timeBeforeSpawn);
+    }
+    public void InvokeEchoSfx()
+    {
+        Invoke(nameof(SpawnEchoSfx), _timeBeforeSpawn);
     }
 }

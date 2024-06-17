@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -42,14 +43,16 @@ public class GroundSpawn : MonoBehaviour
 
     [HideInInspector] public int whichTerrain = 0;
     private int groundInSuccession = 0;
+    private bool _started;
 
-    private GroundData lastGroundData = null;
-    private GroundData nextGroundData = null;
+    private GroundData _lastGroundData = null;
+    private GroundData _nextGroundData = null;
     private GroundData _defaultGround = null;
 
     private int _consecutiveObstacleCount = 0;
     private void Start()
     {
+        _started = true;
         _defaultGround = _pastDefaultGround;
         _isAlive = true;
         actualList = 1;
@@ -94,23 +97,30 @@ public class GroundSpawn : MonoBehaviour
 
     public void SpawnGround(Vector3 playerPosition)
     {
+        if (_started == true)
+        {
+            Instantiate(_defaultGround.ground, _currentPosition, Quaternion.identity);
+            _currentPosition.z++;
+            _started = false;
+        }
+
         if (groundInSuccession == 0)
         {
             whichTerrain = Random.Range(0, _choixList.Count);
-            nextGroundData = _choixList[whichTerrain];
-            while (nextGroundData == lastGroundData)
+            _nextGroundData = _choixList[whichTerrain];
+            while (_nextGroundData == _lastGroundData)
             {
                 whichTerrain = Random.Range(0, _choixList.Count);
-                nextGroundData = _choixList[whichTerrain];
+                _nextGroundData = _choixList[whichTerrain];
             }
-            if (nextGroundData._maxInSuccesion > 0)
+            if (_nextGroundData._maxInSuccesion > 0)
             {
                 groundInSuccession = Random.Range(1, _choixList[whichTerrain]._maxInSuccesion);
             }           
         }
-        lastGroundData = _choixList[whichTerrain];
-        
-        GameObject ground = Instantiate(nextGroundData.ground, _currentPosition, Quaternion.identity);
+        _lastGroundData = _choixList[whichTerrain];
+
+        GameObject ground = Instantiate(_nextGroundData.ground, _currentPosition, Quaternion.identity);
 
         if(ground.TryGetComponent(out Chunk chunk))
         {
@@ -126,11 +136,10 @@ public class GroundSpawn : MonoBehaviour
                 Destroy(ground);
                 ground = Instantiate(_defaultGround.ground, _currentPosition, Quaternion.identity);
 
-                Debug.LogError("REPLACE SOFT LOCK !");
-
                 _consecutiveObstacleCount = 0;
             }
         }
+
 
         _currentGround.Add(ground);
         if (_currentGround.Count > _maxGroundCount)
@@ -139,7 +148,7 @@ public class GroundSpawn : MonoBehaviour
             _currentGround.RemoveAt(0);
         }
         groundInSuccession--;
-        _currentPosition.z++;        
+        _currentPosition.z++;
     }
     private void SafeSpawnStart()
     {

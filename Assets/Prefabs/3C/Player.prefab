@@ -97,34 +97,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 8211764332686342676}
-  _transform: {fileID: 3004247730218478466}
-  _groundGenerator: {fileID: 0}
-  _followPlayer: {fileID: 0}
   _groundSpawn: {fileID: 0}
-  _textScore: {fileID: 0}
   _echo: {fileID: 0}
-  _visuPlayer: {fileID: 6265353379373937058}
-  _vehicle: {fileID: 7564092124841714541, guid: 055afdb4824217147903cdae98b03af2, type: 3}
-  _timer: {fileID: 0}
   _buttonMenu: {fileID: 0}
-  _faildedPauseMenu: {fileID: 0}
+  _failedPauseMenu: {fileID: 0}
   _audioManager: {fileID: 0}
-  _inputTimer: 0.1
-  _getKeyTimer: 0.2
-  _movement: 1
-  _maxRightPosition: 3
-  _maxLeftPosition: -3
-  _leftKey: 276
-  _rightKey: 275
-  _upKey: 273
-  _downKey: 274
+  _playerMove: {fileID: 0}
   _escape: 27
-  _speed: 2
   _graphics: {fileID: 4436479495498409618}
   _paused: 1
-  _maxPositionZReach: 0
-  _currentPositionX: 0
-  _currentPositionZ: 0
 --- !u!114 &196323938809106456
 MonoBehaviour:
   m_ObjectHideFlags: 0
