@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RotationEcho : MonoBehaviour
 {
+    [SerializeField] private Transform _pivot;
     [SerializeField] private EchoTimes _echoTimes;
     public void InvokeRotationLeft()
     {
@@ -23,18 +24,18 @@ public class RotationEcho : MonoBehaviour
     }
     public void RotationLeft()
     {
-        transform.rotation = Quaternion.LookRotation(Vector3.left);
+        _pivot.rotation = Quaternion.LookRotation(Vector3.left);
     }
     public void RotationRight()
     {
-        transform.rotation = Quaternion.LookRotation(Vector3.right);
+        _pivot.rotation = Quaternion.LookRotation(Vector3.right);
     }
     public void RotationUp()
     {
-        transform.rotation = Quaternion.LookRotation(Vector3.forward);
+        _pivot.rotation = Quaternion.LookRotation(Vector3.forward);
     }
     public void RotationDown()
     {
-        transform.rotation = Quaternion.LookRotation(Vector3.back);
+        _pivot.rotation = Quaternion.LookRotation(Vector3.back);
     }
 }
