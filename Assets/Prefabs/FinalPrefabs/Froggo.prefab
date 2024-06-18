@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3981046434654247728}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
   _failedPauseMenu: {fileID: 0}
   _audioManager: {fileID: 0}
   _playerMove: {fileID: 1132691832299187017}
-  _animations: {fileID: 3631249322772262263, guid: b665c7de32feeff4ba74ab50702668ab, type: 3}
+  _animations: {fileID: 0}
   _graphics: {fileID: 8621082016833402484}
   _paused: 1
 --- !u!65 &3075206038199128319
@@ -78,8 +78,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.97803974, y: 0.5952724, z: 0.93963397}
-  m_Center: {x: 0, y: -0.22036678, z: 0.015197098}
+  m_Size: {x: 0.89301765, y: 0.5484421, z: 0.89758044}
+  m_Center: {x: -0.020601869, y: -0.19695163, z: -0.005829662}
 --- !u!54 &7892351165591423415
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   _groundSpawn: {fileID: 0}
   _textScore: {fileID: 0}
   _animations: {fileID: 0}
-  _inputTimer: 0.05
+  _inputTimer: 0.25
   _getKeyTimer: 0.3
   _leftKey: 276
   _rightKey: 275
@@ -322,6 +322,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 953983315068185781}
     m_Modifications:
+    - target: {fileID: 3317213869872436067, guid: b665c7de32feeff4ba74ab50702668ab, type: 3}
+      propertyPath: _pivot
+      value: 
+      objectReference: {fileID: 953983315068185781}
+    - target: {fileID: 3317213869872436067, guid: b665c7de32feeff4ba74ab50702668ab, type: 3}
+      propertyPath: _rotationEcho
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5430673991118874881, guid: b665c7de32feeff4ba74ab50702668ab, type: 3}
       propertyPath: m_Name
       value: FroggoAssets
@@ -443,6 +451,10 @@ PrefabInstance:
     - target: {fileID: 2405691507235239268, guid: ec46bbe60e2c1d642a53a47662bb8da3, type: 3}
       propertyPath: m_Name
       value: FroggoLaser
+      objectReference: {fileID: 0}
+    - target: {fileID: 2405691507235239268, guid: ec46bbe60e2c1d642a53a47662bb8da3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6429336719878785089, guid: ec46bbe60e2c1d642a53a47662bb8da3, type: 3}
       propertyPath: _froggo
