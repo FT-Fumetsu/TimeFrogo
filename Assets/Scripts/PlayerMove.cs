@@ -39,131 +39,24 @@ public class PlayerMove : MonoBehaviour
     public float _currentPositionZ = 0.0f;
     public float _score = 0;
     private Collider _lastIcePlatform = null;
+
+    Vector3 _targetPosition = Vector3.zero;
+
+    private void Start()
+    {
+        _targetPosition = transform.position;
+    }
+
     private void Update()
     {
         _chrono += Time.deltaTime;
-        //RaycastHit hit;
 
-        //if (Input.GetKey(_leftKey) && _chrono > _getKeyTimer)
-        //{
-        //    Debug.Log("LeftKey");
-        //    _chrono = 0;
-        //    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.left), out hit, 1))
-        //    {
-        //        if (hit.transform.tag == "Obstacles")
-        //        {
-        //            return;
-        //        }
-        //        //else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
-        //        //{
-        //        //    MoveLeft();
-        //        //}
-        //        //else if (hit.transform.tag == "Fall")
-        //        //{
-        //        //    MoveLeft();
-        //        //}
-        //    }
-        //    else
-        //    {
-        //        MoveLeft();
-        //    }
-        //}
+        if (_player.IsOnMovingPlatform == false)
+        {
+            Vector3 nextPosition = Vector3.Lerp(transform.position, _targetPosition, .2f);
+            transform.position = nextPosition;
+        }
 
-        //if (Input.GetKey(_rightKey) && _chrono > _getKeyTimer)
-        //{
-        //    _chrono = 0;
-        //    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.right), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.right), out hit, 1))
-        //    {
-        //        if (hit.transform.tag == "Obstacles")
-        //        {
-        //            Debug.Log(hit.transform.name + " right");
-        //        }
-        //        //else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
-        //        //{
-        //        //    MoveRight();
-        //        //}
-        //        //else if (hit.transform.tag == "Fall")
-        //        //{
-        //        //    MoveRight();
-        //        //}
-        //    }
-        //    else
-        //    {
-        //        MoveRight();
-        //    }
-        //}
-
-        //if (Input.GetKey(_upKey) && _chrono > _getKeyTimer)
-        //{
-        //    _chrono = 0;
-        //    if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.forward), out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
-        //    {
-        //        if (hit.transform.tag == "Obstacles")
-        //        {
-        //            Debug.Log(hit.transform.name + "up");
-        //        }
-        //        //else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
-        //        //{
-        //        //    MoveUp();
-        //        //    if (_currentPositionZ <= _maxPositionZReach)
-        //        //    {
-        //        //        return;
-        //        //    }
-        //        //    else
-        //        //    {
-        //        //        SpawnGround();
-        //        //    }
-        //        //}
-        //        //else if (hit.transform.tag == "Fall")
-        //        //{
-        //        //    MoveUp();
-        //        //    if (_currentPositionZ <= _maxPositionZReach)
-        //        //    {
-        //        //        return;
-        //        //    }
-        //        //    else
-        //        //    {
-        //        //        SpawnGround();
-        //        //    }
-        //        //}
-        //    }
-        //    else
-        //    {
-        //        MoveUp();
-        //        if (_currentPositionZ <= _maxPositionZReach)
-        //        {
-        //            return;
-        //        }
-        //        else
-        //        {
-        //            SpawnGround();
-        //        }
-        //    }
-        //}
-
-        //if (Input.GetKey(_downKey) && _chrono > _getKeyTimer)
-        //{
-        //    _chrono = 0;
-        //    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1))
-        //    {
-        //        if (hit.transform.tag == "Obstacles")
-        //        {
-        //            return;
-        //        }
-        //    }
-        //    //else if (hit.transform.tag == "Fall" && hit.transform.tag == "DontFall")
-        //    //{
-        //    //    MoveDown();
-        //    //}
-        //    //else if (hit.transform.tag == "Fall")
-        //    //{
-        //    //    MoveDown();
-        //    //}
-        //    else
-        //    {
-        //        MoveDown();
-        //    }
-        //}
         _textScore.SetText("Score : " + _score.ToString());
     }
 
@@ -396,19 +289,37 @@ public class PlayerMove : MonoBehaviour
     }
     private void ApplyXPosition()
     {
-        //_animations._jumpFroggo = true;
+        _animations.FroggoJump();
         Vector3 newPosition = transform.position;
         newPosition.x = _currentPositionX;
-        _transform.position = newPosition;
+
+        if (_player.IsOnMovingPlatform == false)
+        {
+            _targetPosition = newPosition;
+        }
+        else
+        {
+            _targetPosition = newPosition;
+            transform.position = newPosition;
+        }
 
         //_player.PlayMovementTween(newPosition);
     }
     private void ApplyZPosition()
     {
-        //_animations._jumpFroggo = true;
+        _animations.FroggoJump();
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
-        _transform.position = newPosition;
+
+        if (_player.IsOnMovingPlatform == false)
+        {
+            _targetPosition = newPosition;
+        }
+        else
+        {
+            _targetPosition = newPosition;
+            transform.position = newPosition;
+        }
 
         //_player.PlayMovementTween(newPosition);
     }

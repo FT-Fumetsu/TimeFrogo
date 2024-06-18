@@ -1764,7 +1764,7 @@ GameObject:
   - component: {fileID: 5434896873097762404}
   - component: {fileID: 1840796712902624888}
   - component: {fileID: 3317213869872436067}
-  - component: {fileID: 3631249322772262263}
+  - component: {fileID: 9182028934450469877}
   m_Layer: 0
   m_Name: FroggoAssets
   m_TagString: Untagged
@@ -1841,8 +1841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a2368e5f0a2bb4db3be5753cc275d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationEcho: {fileID: 0}
---- !u!114 &3631249322772262263
+  _rotationEcho: {fileID: 4325282611012585090, guid: 67bf0704e45f35b42b134014a386d6e1, type: 3}
+--- !u!114 &9182028934450469877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1851,18 +1851,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5430673991118874881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffe0a5472e1c47644b90a6cc66da1e69, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b1ba76d28c0df24bb38ba65a3b8e6a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _froggo: {fileID: 1840796712902624888}
-  _echo: {fileID: 9115985860448930829, guid: 67bf0704e45f35b42b134014a386d6e1, type: 3}
-  _laserFroggo: {fileID: 7819219036217552808, guid: ec46bbe60e2c1d642a53a47662bb8da3, type: 3}
-  _trapdoor: {fileID: 2804999708910456800, guid: f13e8d9bd43d105498cb8f593a50a5f2, type: 3}
-  _jumpFroggo: 0
-  _echoJump: 0
-  _killLaser: 0
-  _killTrapdoor: 0
-  _killEcho: 1
+  _froggoJump: {fileID: 1840796712902624888}
 --- !u!1 &5646298629663332965
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,9 @@ public class FroggoAnimation : MonoBehaviour
     }
     public void Jump()
     {
-        _froggoJump.SetTrigger("JumpFroggo");
+        _froggoJump.SetTrigger("Jump");
+        AnimatorStateInfo info = _froggoJump.GetCurrentAnimatorStateInfo(0);
+        float jumpLenght = info.length;
     }
     public void TrapKill()
     {

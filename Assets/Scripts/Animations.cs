@@ -4,32 +4,31 @@ using UnityEngine;
 
 public class Animations : MonoBehaviour
 {
-    [SerializeField] private Animator _froggo;
-    [SerializeField] private Animator _echo;
-    [SerializeField] private Animator _laserFroggo;
-    [SerializeField] private Animator _trapdoor;
+    [SerializeField] private FroggoAnimation _froggo;
+    [SerializeField] private EchoAnimation _echo;
+    [SerializeField] private LaserFroggoAnimation _laserFroggo;
+    [SerializeField] private TrapdoorAnimation _trapdoor;
 
-
-    public void JumpFroggo()
-    {
-        _froggo.SetTrigger("JumpFroggo");
-    }
     public void EchoJump()
     {
-        _echo.SetTrigger("EchoJump");
+        _echo.Jump();
     }
-    public void KillLaser()
+    public void FroggoJump()
     {
-        _laserFroggo.SetTrigger("LaserKill");
+        _froggo.Jump();
     }
-    public void KillTrapdoor()
+    public void EchoKill()
     {
-        _froggo.SetTrigger("TrapKill");
-        _laserFroggo.SetTrigger("OpenTrapdoor");
+        _echo.EchoKill();
+        _froggo.EchoKill();
     }
-    public void KillEcho()
+    public void TrapKill()
     {
-        _froggo.SetTrigger("FroggerKillEcho");
-        _echo.SetTrigger("EchoKill");
+        _froggo.TrapKill();
+        _trapdoor.TrapKill();
+    }
+    public void LaserKill()
+    {
+        _laserFroggo.LaserKill();
     }
 }

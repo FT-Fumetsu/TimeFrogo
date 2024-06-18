@@ -2,7 +2,6 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
@@ -28,7 +27,9 @@ public class Character : MonoBehaviour
     private Collider _lastIcePlatform = null;
     private GameObject _currentIcePlatform = null;
 
-    //private Tween _movementTween = null;
+    private Tween _movementTween = null;
+
+    public bool IsOnMovingPlatform { get; private set; } = false;
 
     private void Start()
     {
@@ -39,7 +40,7 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
-        _graphics.transform.localPosition = Vector3.zero;
+        //_graphics.transform.localPosition = Vector3.zero;
         if (_paused == true)
         {
             _failedPauseMenu.PauseMenu();
@@ -79,22 +80,22 @@ public class Character : MonoBehaviour
         }
         else if(other.gameObject.tag == "Echo")
         {
-            //_animations._killEcho = true;
+            _animations.EchoKill();
             GameOver();
             _groundSpawn._isAlive = false;
-            Destroy(gameObject);
+
         }
         else if(other.gameObject.tag == "Trapdoor")
         {
-            //_animations._killTrapdoor = true;
+            _animations.TrapKill();
             GameOver();
             _audioManager.PlaySFX(_audioManager._fall);
             _groundSpawn._isAlive = false;
-            DestroyPlayer();
+
         }
         else if (other.gameObject.tag == "Laser")
         {
-            //_animations._killLaser = true;
+            _animations.LaserKill();
             GameOver();
             _audioManager.PlaySFX(_audioManager._laserShot);
             _groundSpawn._isAlive = false;
@@ -113,6 +114,8 @@ public class Character : MonoBehaviour
             _playerMove._currentPositionX = roundXPos;
             _echo.AddExitPlatformPosition(pos);
             _echo.InvokeExitPlatform();
+
+            IsOnMovingPlatform = false;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -134,10 +137,10 @@ public class Character : MonoBehaviour
             {                
                 _echo.InvokeEchoSlide();
             }
+
+            IsOnMovingPlatform = true;
         }
     }
-  
-
     private void DrawRaycasts()
     {
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1, Color.red);
@@ -175,8 +178,6 @@ public class Character : MonoBehaviour
     //    _graphics.DOMove(newPosition, .1f).SetEase(Ease.InOutBack);
     //    Transform graphics = _graphics.GetChild(0);
     //    Sequence s = DOTween.Sequence();
-    //    s.Append(graphics.DOMoveY(2f, .05f).SetEase(Ease.OutQuint));
-    //    s.Append(graphics.DOMoveY(1f, .05f).SetEase(Ease.OutBounce));
     //    s.Play();
     //    _movementTween.Play();
     //}
@@ -184,7 +185,8 @@ public class Character : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawCube(transform.position, GetComponent<BoxCollider>().size);
+        BoxCollider collider = GetComponent<BoxCollider>();
+        Gizmos.DrawCube(transform.position + collider.center, collider.size);
     }
     public void Escape(CallbackContext callbackContext)
     {

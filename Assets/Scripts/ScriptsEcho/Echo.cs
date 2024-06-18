@@ -10,7 +10,7 @@ public class Echo : MonoBehaviour
     [SerializeField] private Transform _transform = null;
     [SerializeField] private EchoTimes _echoTimes;
     //[SerializeField] private Vehicle _vehicle;
-    //[SerializeField] private Transform _graphics = null;
+    [SerializeField] private Transform _graphics = null;
     [SerializeField] private MoveEchoSfx _moveEchoSfx;
     [SerializeField] private Animations _animations;
 
@@ -24,7 +24,7 @@ public class Echo : MonoBehaviour
     [SerializeField] private float _currentPositionx = 0.0f;
     [SerializeField] private float _currentPositionZ = 0.0f;
 
-    //private Tween _movementTween = null;
+    private Tween _movementTween = null;
 
     private List<Vector3> _exitPlatformPosition = new List<Vector3>();
 
@@ -36,29 +36,22 @@ public class Echo : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.right * _echoSpeed * Time.deltaTime);
-        //Debug.Log("current X position : "+_currentPositionX);
-
     }
     public void InvokeEchoMoveUp(Vector3 nextPlayerPos)
     {
         Invoke(nameof(EchoMoveUp), _echoTimes._timeBeforeMove);
-        //_moveEchoSfx.InvokeEchoSfxMoveForward();
     }
     public void InvokeEchoMoveDown(Vector3 nextPlayerPos) 
     {
         Invoke(nameof(EchoMoveDown), _echoTimes._timeBeforeMove);
-        //_moveEchoSfx.InvokeEchoSfxMoveBack();
     }
     public void InvokeEchoMoveLeft(Vector3 nextPlayerPos)
     {
         Invoke(nameof (EchoMoveLeft), _echoTimes._timeBeforeMove);
-        //Debug.Log("nextPlayerPos" + nextPlayerPos);
     }
     public void InvokeEchoMoveRight(Vector3 nextPlayerPos)
     {
         Invoke(nameof(EchoMoveRight), _echoTimes._timeBeforeMove);
-        //Debug.Log("nextPlayerPos" + nextPlayerPos);
-
     }
     public void InvokeEchoSlideNeg()
     {        
@@ -103,8 +96,6 @@ public class Echo : MonoBehaviour
         Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
         transform.position = pos;
         _currentPositionx = roundXPos;
-        //Debug.Log("round  X position : " + roundXPos);
-        //Debug.Log("_currentPositionx : " + _currentPositionx);
 
     }
     public void InvokeEchoStopSpeed()
@@ -123,8 +114,6 @@ public class Echo : MonoBehaviour
             return;
         }
         _currentPositionx += _movement;
-        //Debug.Log("EchoMoveRight");
-        //Debug.Log("_movement right : " + _movement);
         ApplyXPosition();
     }
 
@@ -136,8 +125,6 @@ public class Echo : MonoBehaviour
         }
 
         _currentPositionx -= _movement;
-        //Debug.Log("EchoMoveLeft");
-        //Debug.Log("_movement left : " + _movement);
 
         ApplyXPosition();
     }
@@ -158,18 +145,16 @@ public class Echo : MonoBehaviour
 
     private void ApplyXPosition()
     {
-        //_animations._echoJump = true;
+        _animations.EchoJump();
         Vector3 newPosition = transform.position;
         newPosition.x = _currentPositionx;
         _transform.position = newPosition;
-        //Debug.Log("apply X position : "+_currentPositionx);
-        //Debug.Log("newPosition X  : " + newPosition.x);
         //PlayMovementTween(newPosition);
     }
 
     private void ApplyZPosition()
     {
-        //_animations._echoJump = true;
+        _animations.EchoJump();
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
         _transform.position = newPosition;
@@ -187,8 +172,6 @@ public class Echo : MonoBehaviour
     //    _graphics.DOMove(newPosition, .1f).SetEase(Ease.InOutBack);
     //    Transform graphics = _graphics.GetChild(0);
     //    Sequence s = DOTween.Sequence();
-    //    s.Append(graphics.DOMoveY(2f, .05f).SetEase(Ease.OutQuint));
-    //    s.Append(graphics.DOMoveY(1f, .05f).SetEase(Ease.OutBounce));
     //    s.Play();
     //    _movementTween.Play();
     //}

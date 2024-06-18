@@ -91,7 +91,7 @@ PrefabInstance:
       addedObject: {fileID: 2530441639257486729}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7f7d46fdcd1ca748acb0c58c1953386, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1705106706547422626}
+      addedObject: {fileID: -7883581615494431157}
   m_SourcePrefab: {fileID: 100100000, guid: d7f7d46fdcd1ca748acb0c58c1953386, type: 3}
 --- !u!1 &647463696836557360 stripped
 GameObject:
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0ca023a369b8d44b453db7a7ae0b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _echoTimes: {fileID: 0}
+  _echoTimes: {fileID: 8418576761969707439, guid: 70f7cad7c2eca414f8035e1893eee096, type: 3}
 --- !u!65 &2530441639257486729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 18.479736, y: 16.272364, z: 23.933714}
   m_Center: {x: -0.37399077, y: 8.523533, z: 4.433758}
---- !u!114 &1705106706547422626
+--- !u!114 &-7883581615494431157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,15 +162,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 647463696836557360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffe0a5472e1c47644b90a6cc66da1e69, type: 3}
+  m_Script: {fileID: 11500000, guid: dd4052be163f1be4d89bca847b14a142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _froggo: {fileID: 1840796712902624888, guid: b665c7de32feeff4ba74ab50702668ab, type: 3}
-  _echo: {fileID: 9115985860448930829}
-  _laserFroggo: {fileID: 7819219036217552808, guid: ec46bbe60e2c1d642a53a47662bb8da3, type: 3}
-  _trapdoor: {fileID: 2804999708910456800, guid: f13e8d9bd43d105498cb8f593a50a5f2, type: 3}
-  _jumpFroggo: 0
-  _echoJump: 0
-  _killLaser: 0
-  _killTrapdoor: 0
-  _killEcho: 0
+  _echoAssets: {fileID: 9115985860448930829}

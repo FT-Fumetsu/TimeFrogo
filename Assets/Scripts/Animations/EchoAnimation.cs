@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class EchoAnimation : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
+    [SerializeField] private Animator _echoAssets;
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
+        _echoAssets = GetComponent<Animator>();
     }
     public void Jump()
     {
-        _animator.SetTrigger("EchoJump");
+        _echoAssets.SetTrigger("EchoJump");
     }
     public void EchoKill()
     {
-        _animator.SetTrigger("EchoKill");
+        _echoAssets.SetTrigger("EchoKill");
     }
 }

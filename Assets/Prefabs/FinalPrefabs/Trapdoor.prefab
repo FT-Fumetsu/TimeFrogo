@@ -192,7 +192,7 @@ PrefabInstance:
       addedObject: {fileID: 2804999708910456800}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d9438fc0532b2ae47b4ae43c741c6fd9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1064963578863439404}
+      addedObject: {fileID: -5086298415992748653}
   m_SourcePrefab: {fileID: 100100000, guid: d9438fc0532b2ae47b4ae43c741c6fd9, type: 3}
 --- !u!1 &4033233375606972202 stripped
 GameObject:
@@ -241,7 +241,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1064963578863439404
+--- !u!114 &-5086298415992748653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,15 +250,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4033233375606972202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffe0a5472e1c47644b90a6cc66da1e69, type: 3}
+  m_Script: {fileID: 11500000, guid: 12cdf51189f857643a4fe14ef681d297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _froggo: {fileID: 1840796712902624888, guid: b665c7de32feeff4ba74ab50702668ab, type: 3}
-  _echo: {fileID: 9115985860448930829, guid: 67bf0704e45f35b42b134014a386d6e1, type: 3}
-  _laserFroggo: {fileID: 7819219036217552808, guid: ec46bbe60e2c1d642a53a47662bb8da3, type: 3}
   _trapdoor: {fileID: 2804999708910456800}
-  _jumpFroggo: 0
-  _echoJump: 0
-  _killLaser: 0
-  _killTrapdoor: 0
-  _killEcho: 0
