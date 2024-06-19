@@ -36,6 +36,7 @@ public class PlayerMove : MonoBehaviour
     public float _currentPositionX = 0.0f;
     public float _currentPositionZ = 0.0f;
     public float _score = 0;
+    public bool _outPlatform = false;
     private Collider _lastIcePlatform = null;
 
     Vector3 _targetPosition = Vector3.zero;
@@ -60,7 +61,6 @@ public class PlayerMove : MonoBehaviour
 
     public void PlayerMoveUp(CallbackContext callbackContext)
     {
-        RaycastHit hit;
         if (callbackContext.phase != InputActionPhase.Started)
         {
             return;
@@ -68,7 +68,7 @@ public class PlayerMove : MonoBehaviour
         else if (_chrono > _inputTimer)
         {            
             _chrono = 0;
-            if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.forward, out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.forward, out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
+            if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.forward, out RaycastHit hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.forward, out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
@@ -307,9 +307,55 @@ public class PlayerMove : MonoBehaviour
     }
     private void ApplyZPosition()
     {
-        _animations.FroggoJump();
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
+
+        bool isAllRaycastCollide = true;
+        bool isWater = true;
+        if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down), out RaycastHit hit, 1))
+        {
+            isWater = isWater && hit.transform.CompareTag("Water");
+        }
+        else
+        {
+            isAllRaycastCollide = false;
+        }
+        if (Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, 1))
+        {
+            isWater = isWater && hit.transform.CompareTag("Water");
+        }
+        else
+        {
+            isAllRaycastCollide = false;
+        }
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.down), out hit, 1))
+        {
+            isWater = isWater && hit.transform.CompareTag("Water");
+        }
+        else
+        {
+            isAllRaycastCollide = false;
+        }
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.down), out hit, 1))
+        {
+            isWater = isWater && hit.transform.CompareTag("Water");
+        }
+        else
+        {
+            isAllRaycastCollide = false;
+        }
+
+        if(isAllRaycastCollide) 
+        {
+            if(isWater && !_outPlatform)
+            {                
+                _player.KillWater();
+            }
+            else
+            {
+                _animations.FroggoJump();
+            }
+        }       
 
         if (_player.IsOnMovingPlatform == false)
         {
