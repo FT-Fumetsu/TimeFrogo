@@ -77,6 +77,7 @@ public class Character : MonoBehaviour
         else if(other.gameObject.tag == "Echo")
         {
             _animations.EchoKill();
+            Invoke(nameof(DestroyPlayer), 2f);
             GameOver();
             _groundSpawn._isAlive = false;
 
@@ -84,6 +85,7 @@ public class Character : MonoBehaviour
         else if(other.gameObject.tag == "Trapdoor")
         {
             _animations.TrapKill();
+            Invoke(nameof(DestroyPlayer), 0.6052631f);
             GameOver();
             _audioManager.PlaySFX(_audioManager._fall);
             _groundSpawn._isAlive = false;
@@ -92,16 +94,17 @@ public class Character : MonoBehaviour
         else if (other.gameObject.tag == "Laser")
         {
             _animations.LaserKill();
+            Invoke(nameof(DestroyPlayer), 0.4827586f);
             GameOver();
             _audioManager.PlaySFX(_audioManager._laserShot);
-            _groundSpawn._isAlive = false;
-            Destroy(gameObject);
+            _groundSpawn._isAlive = false;            
         }
     }
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "IceBlockR" || collision.gameObject.tag == "IceBlockL")
         {
+            StartCoroutine(OutPlatformCoroutine());
             _currentIcePlatform = null;
             float xPos = collision.transform.position.x;
             int roundXPos = Mathf.RoundToInt(xPos);
@@ -110,6 +113,7 @@ public class Character : MonoBehaviour
             _playerMove._currentPositionX = roundXPos;
             _echo.AddExitPlatformPosition(pos);
             _echo.InvokeExitPlatform();
+
 
             IsOnMovingPlatform = false;
         }
@@ -120,7 +124,6 @@ public class Character : MonoBehaviour
         {
             transform.SetParent(collision.transform);
             _playerMove.DontMoveOnIceBlocks();
-            //transform.localPosition = Vector3.zero;
             _currentIcePlatform = collision.gameObject;
             _lastIcePlatform = collision.collider;
 
@@ -153,6 +156,11 @@ public class Character : MonoBehaviour
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.back) * 1, Color.red);
         Debug.DrawRay(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
         Debug.DrawRay(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
+
+        Debug.DrawRay(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.down) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.down) * 1, Color.red);
     }
     private void DestroyPlayer()
     {
@@ -190,5 +198,20 @@ public class Character : MonoBehaviour
             _paused = false;
             Time.timeScale = 1;
         }
+    }
+    public void KillWater()
+    {
+        _animations.TrapKill();
+        GameOver();
+        _audioManager.PlaySFX(_audioManager._splashSFX);
+        _groundSpawn._isAlive = false;
+        DestroyPlayer();
+    }
+
+    IEnumerator OutPlatformCoroutine()
+    {
+        _playerMove._outPlatform = true;
+        yield return new WaitForSeconds(.5f);
+        _playerMove._outPlatform = false;
     }
 }

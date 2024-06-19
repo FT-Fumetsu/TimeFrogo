@@ -7469,6 +7469,7 @@ MonoBehaviour:
   _currentPositionX: 0
   _currentPositionZ: 0
   _score: 0
+  _outPlatform: 0
 --- !u!4 &1754105936 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8119769157450884978, guid: 70f7cad7c2eca414f8035e1893eee096, type: 3}
@@ -7515,7 +7516,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769945671}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -8515,7 +8516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 915270791708494577, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 915270791708494577, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8713,7 +8714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5092942969637196382, guid: 70f7cad7c2eca414f8035e1893eee096, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6903762839847470071, guid: 70f7cad7c2eca414f8035e1893eee096, type: 3}
       propertyPath: _player
