@@ -27,8 +27,6 @@ public class Character : MonoBehaviour
     private Collider _lastIcePlatform = null;
     private GameObject _currentIcePlatform = null;
 
-    private Tween _movementTween = null;
-
     public bool IsOnMovingPlatform { get; private set; } = false;
 
     private void Start()
@@ -36,11 +34,9 @@ public class Character : MonoBehaviour
         _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         _buttonMenu.UnPause();
         _paused = false;
-        //_graphics.SetParent(null);
     }
     private void Update()
     {
-        //_graphics.transform.localPosition = Vector3.zero;
         if (_paused == true)
         {
             _failedPauseMenu.PauseMenu();
@@ -122,7 +118,6 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.tag == "IceBlockR" || collision.gameObject.tag == "IceBlockL" && collision.collider != _lastIcePlatform)
         {
-            //_graphics.transform.SetParent(collision.transform);
             transform.SetParent(collision.transform);
             _playerMove.DontMoveOnIceBlocks();
             //transform.localPosition = Vector3.zero;
@@ -172,16 +167,6 @@ public class Character : MonoBehaviour
         _groundSpawn._snowStormSfx.mute = true;
         _groundSpawn._riverSfx.mute = true;
     }
-    //public void PlayMovementTween(Vector3 newPosition)
-    //{
-    //    _movementTween?.Kill();
-    //    _graphics.DOMove(newPosition, .1f).SetEase(Ease.InOutBack);
-    //    Transform graphics = _graphics.GetChild(0);
-    //    Sequence s = DOTween.Sequence();
-    //    s.Play();
-    //    _movementTween.Play();
-    //}
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -194,13 +179,13 @@ public class Character : MonoBehaviour
         {
             return;
         }
-        if (/*Input.GetKeyDown(_escape) && */_paused == false)
+        if (_paused == false)
         {
             _paused = true;
             Time.timeScale = 0;
         }
 
-        else if (/*Input.GetKeyDown(_escape) && */_paused == true)
+        else if (_paused == true)
         {
             _paused = false;
             Time.timeScale = 1;

@@ -442,11 +442,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3111928409041993262, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: -0.345
       objectReference: {fileID: 0}
     - target: {fileID: 3111928409041993262, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.046
+      value: 0.013
       objectReference: {fileID: 0}
     - target: {fileID: 3111928409041993262, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: m_LocalRotation.w
@@ -483,7 +483,7 @@ PrefabInstance:
     - target: {fileID: 3658077143384857035, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: _vehicle
       value: 
-      objectReference: {fileID: 195495540426690207, guid: b644540360e538f4bbcbcb997f741cb0, type: 3}
+      objectReference: {fileID: 195495540426690207, guid: 77432cbe4c2a8f04e960c97301bfc787, type: 3}
     - target: {fileID: 6982023648187824670, guid: ce3f1bf619f050a478cb7600b98799ed, type: 3}
       propertyPath: m_Name
       value: VehicleSpawner (1)
@@ -690,8 +690,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 11.720638, y: 0.97374254, z: 1}
-  m_Center: {x: 0.25058746, y: -0.013128549, z: 0}
+  m_Size: {x: 11.720638, y: 0.95725405, z: 1}
+  m_Center: {x: 0.25058746, y: -0.02137278, z: 0}
 --- !u!1001 &8739395341487571885
 PrefabInstance:
   m_ObjectHideFlags: 0

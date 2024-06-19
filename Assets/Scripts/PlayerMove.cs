@@ -27,8 +27,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField, Range(0, 10)] private float _getKeyTimer;
     [SerializeField] private KeyCode _leftKey = KeyCode.LeftArrow;
     [SerializeField] private KeyCode _rightKey = KeyCode.RightArrow;
-    //[SerializeField] private KeyCode _upKey = KeyCode.UpArrow;
-    //[SerializeField] private KeyCode _downKey = KeyCode.DownArrow;
     [SerializeField] private float _movement = 1.0f;
     [SerializeField] private float _maxRightPosition = 3.0f;
     [SerializeField] private float _maxLeftPosition = -3.0f;
@@ -62,13 +60,12 @@ public class PlayerMove : MonoBehaviour
 
     public void PlayerMoveUp(CallbackContext callbackContext)
     {
-        if(callbackContext.phase != InputActionPhase.Started)
+        RaycastHit hit;
+        if (callbackContext.phase != InputActionPhase.Started)
         {
             return;
         }
-
-        RaycastHit hit;
-        if (_chrono > _inputTimer)
+        else if (_chrono > _inputTimer)
         {            
             _chrono = 0;
             if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.forward, out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.forward, out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
@@ -118,13 +115,12 @@ public class PlayerMove : MonoBehaviour
     }
     public void PlayerMoveDown(CallbackContext callbackContext)
     {
+        RaycastHit hit;
         if (callbackContext.phase != InputActionPhase.Started)
         {
             return;
         }
-
-        RaycastHit hit;
-        if (_chrono > _inputTimer)
+        else if (_chrono > _inputTimer)
         {
             _chrono = 0;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1))
@@ -150,13 +146,16 @@ public class PlayerMove : MonoBehaviour
     }
     public void PlayerMoveLeft(CallbackContext callbackContext)
     {
+        RaycastHit hit;
         if (callbackContext.phase != InputActionPhase.Started)
         {
             return;
         }
-
-        RaycastHit hit;
-        if (_chrono > _inputTimer)
+        else if (_player.IsOnMovingPlatform == true)
+        {
+            return;
+        }
+        else if (_chrono > _inputTimer)
         {
             Debug.Log("Left");
             _chrono = 0;
@@ -183,13 +182,16 @@ public class PlayerMove : MonoBehaviour
     }
     public void PlayerMoveRight(CallbackContext callbackContext)
     {
+        RaycastHit hit;
         if (callbackContext.phase != InputActionPhase.Started)
         {
             return;
         }
-
-        RaycastHit hit;
-        if (_chrono > _inputTimer)
+        else if (_player.IsOnMovingPlatform == true)
+        {
+            return;
+        }
+        else if (_chrono > _inputTimer)
         {
             Debug.Log("Right");
             _chrono = 0;
@@ -302,8 +304,6 @@ public class PlayerMove : MonoBehaviour
             _targetPosition = newPosition;
             transform.position = newPosition;
         }
-
-        //_player.PlayMovementTween(newPosition);
     }
     private void ApplyZPosition()
     {
@@ -320,8 +320,6 @@ public class PlayerMove : MonoBehaviour
             _targetPosition = newPosition;
             transform.position = newPosition;
         }
-
-        //_player.PlayMovementTween(newPosition);
     }
     public void SpawnGround()
     {
