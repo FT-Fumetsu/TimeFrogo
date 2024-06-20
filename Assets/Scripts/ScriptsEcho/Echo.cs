@@ -9,8 +9,6 @@ public class Echo : MonoBehaviour
     [SerializeField] private Character _player;
     [SerializeField] private Transform _transform = null;
     [SerializeField] private EchoTimes _echoTimes;
-    //[SerializeField] private Vehicle _vehicle;
-    [SerializeField] private Transform _graphics = null;
     [SerializeField] private MoveEchoSfx _moveEchoSfx;
     [SerializeField] private Animations _animations;
 
@@ -24,14 +22,12 @@ public class Echo : MonoBehaviour
     [SerializeField] private float _currentPositionx = 0.0f;
     [SerializeField] private float _currentPositionZ = 0.0f;
 
-    private Tween _movementTween = null;
 
     private List<Vector3> _exitPlatformPosition = new List<Vector3>();
 
     private void Start()
     {
         _echoSpeed = 0;
-        //_graphics.SetParent(null);
     }
     private void Update()
     {
@@ -149,7 +145,6 @@ public class Echo : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.x = _currentPositionx;
         _transform.position = newPosition;
-        //PlayMovementTween(newPosition);
     }
 
     private void ApplyZPosition()
@@ -158,21 +153,10 @@ public class Echo : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
         _transform.position = newPosition;
-
-        //PlayMovementTween(newPosition);
     }
 
     public void AddExitPlatformPosition(Vector3 position)
     {
         _exitPlatformPosition.Add(position);
     }
-    //private void PlayMovementTween(Vector3 newPosition)
-    //{
-    //    _movementTween?.Kill();
-    //    _graphics.DOMove(newPosition, .1f).SetEase(Ease.InOutBack);
-    //    Transform graphics = _graphics.GetChild(0);
-    //    Sequence s = DOTween.Sequence();
-    //    s.Play();
-    //    _movementTween.Play();
-    //}
 }

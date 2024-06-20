@@ -105,16 +105,18 @@ public class Character : MonoBehaviour
         if (collision.gameObject.tag == "IceBlockR" || collision.gameObject.tag == "IceBlockL")
         {
             _currentIcePlatform = null;
+
             float xPos = collision.transform.position.x;
             int roundXPos = Mathf.RoundToInt(xPos);
             Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
-            transform.position = pos;
+            //transform.position = pos;
             _playerMove._currentPositionX = roundXPos;
+            transform.position = new Vector3 (_playerMove._currentPositionX, transform.position.y, transform.position.z);            
             _echo.AddExitPlatformPosition(pos);
             _echo.InvokeExitPlatform();
 
-
             IsOnMovingPlatform = false;
+            
         }
     }
     private void OnCollisionEnter(Collision collision)

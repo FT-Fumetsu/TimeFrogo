@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private GroundSpawn _groundSpawn;
     [SerializeField] private TextMeshProUGUI _textScore;
     [SerializeField] private Animations _animations;
+    [SerializeField] private HighScore _highScore;
 
     [Header("Balancing")]
     [SerializeField, Range(0, 10)] private float _inputTimer;
@@ -36,7 +37,6 @@ public class PlayerMove : MonoBehaviour
     public float _currentPositionX = 0.0f;
     public float _currentPositionZ = 0.0f;
     public float _score = 0;
-    //public bool _outPlatform = false;
     private Collider _lastIcePlatform = null;
 
     Vector3 _targetPosition = Vector3.zero;
@@ -316,6 +316,13 @@ public class PlayerMove : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
 
+        //float xPos = transform.position.x;
+        //int roundXPos = Mathf.RoundToInt(xPos);
+        //Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
+        //transform.position = pos;
+        //_currentPositionX = roundXPos;
+        //_echo.AddExitPlatformPosition(pos);
+
         bool isAllRaycastCollide = true;
         bool isWater = true;
         if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down), out RaycastHit hit, 1))
@@ -377,7 +384,7 @@ public class PlayerMove : MonoBehaviour
     {
         _followPlayer.MoveUp();
         _maxPositionZReach = _currentPositionZ;
-        _score++;
+        _highScore.AddScore();
         _groundSpawn.SpawnGround(transform.position);
     }
     public void DontMoveOnIceBlocks()
