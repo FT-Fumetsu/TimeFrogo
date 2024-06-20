@@ -7469,7 +7469,6 @@ MonoBehaviour:
   _currentPositionX: 0
   _currentPositionZ: 0
   _score: 0
-  _outPlatform: 0
 --- !u!4 &1754105936 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8119769157450884978, guid: 70f7cad7c2eca414f8035e1893eee096, type: 3}

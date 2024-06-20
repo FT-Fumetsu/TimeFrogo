@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
     public float _currentPositionX = 0.0f;
     public float _currentPositionZ = 0.0f;
     public float _score = 0;
-    public bool _outPlatform = false;
+    //public bool _outPlatform = false;
     private Collider _lastIcePlatform = null;
 
     Vector3 _targetPosition = Vector3.zero;
@@ -68,7 +68,9 @@ public class PlayerMove : MonoBehaviour
         else if (_chrono > _inputTimer)
         {            
             _chrono = 0;
-            if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.forward, out RaycastHit hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.forward, out hit, 1) || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
+            if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.forward, out RaycastHit hit, 1) || 
+                Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.forward, out hit, 1) || 
+                Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
@@ -123,7 +125,9 @@ public class PlayerMove : MonoBehaviour
         else if (_chrono > _inputTimer)
         {
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, 1) || 
+                Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1) || 
+                Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
@@ -159,7 +163,9 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("Left");
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.left), out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.left), out hit, 1))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, 1) || 
+                Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.left), out hit, 1) || 
+                Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.left), out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
@@ -195,7 +201,9 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("Right");
             _chrono = 0;
-            if (Physics.Raycast(transform.position, transform.right, out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f),transform.right, out hit, 1) || Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.right, out hit, 1))
+            if (Physics.Raycast(transform.position, transform.right, out hit, 1) || 
+                Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f),transform.right, out hit, 1) || 
+                Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.right, out hit, 1))
             {
                 if (hit.transform.tag == "Obstacles")
                 {
@@ -275,7 +283,6 @@ public class PlayerMove : MonoBehaviour
         ApplyZPosition();
         _echo.InvokeEchoMoveUp(transform.position);
         transform.SetParent(null);
-        //_player._graphics.transform.SetParent(null);
         _echo.InvokeEchoStopSlide(transform.position);
     }
     public void MoveDown()
@@ -286,7 +293,6 @@ public class PlayerMove : MonoBehaviour
         ApplyZPosition();
         _echo.InvokeEchoMoveDown(transform.position);
         transform.SetParent(null);
-        //_player._graphics.transform.SetParent(null);
         _echo.InvokeEchoStopSlide(transform.position);
     }
     private void ApplyXPosition()
@@ -347,7 +353,7 @@ public class PlayerMove : MonoBehaviour
 
         if(isAllRaycastCollide) 
         {
-            if(isWater && !_outPlatform)
+            if(isWater)
             {                
                 _player.KillWater();
             }

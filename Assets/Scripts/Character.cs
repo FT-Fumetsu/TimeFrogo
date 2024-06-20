@@ -104,7 +104,6 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.tag == "IceBlockR" || collision.gameObject.tag == "IceBlockL")
         {
-            StartCoroutine(OutPlatformCoroutine());
             _currentIcePlatform = null;
             float xPos = collision.transform.position.x;
             int roundXPos = Mathf.RoundToInt(xPos);
@@ -206,12 +205,5 @@ public class Character : MonoBehaviour
         _audioManager.PlaySFX(_audioManager._splashSFX);
         _groundSpawn._isAlive = false;
         DestroyPlayer();
-    }
-
-    IEnumerator OutPlatformCoroutine()
-    {
-        _playerMove._outPlatform = true;
-        yield return new WaitForSeconds(.5f);
-        _playerMove._outPlatform = false;
     }
 }
