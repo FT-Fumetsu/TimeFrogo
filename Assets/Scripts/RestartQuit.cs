@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class RestartQuit : MonoBehaviour
 {
     [SerializeField] private Character _player;
@@ -22,4 +23,7 @@ public class RestartQuit : MonoBehaviour
         _player._paused = false;
         Time.timeScale = 1.0f;
     }
+   
+
 }
+
