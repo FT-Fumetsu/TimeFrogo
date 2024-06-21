@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class RestartQuit : MonoBehaviour
 {
     [SerializeField] private Character _player;
@@ -23,4 +24,7 @@ public class RestartQuit : MonoBehaviour
         _failedPauseMenu.UnPause();
         Time.timeScale = 1.0f;
     }
+   
+
 }
+

@@ -40,7 +40,7 @@ public class ButtonMenu : MonoBehaviour
     }
     public void SettingsButton()
     {
-        _mainMenu.SetActive(false);
+        _mainMenu.SetActive(true);
         _creditsMenu.SetActive(false);
         _controlsMenu.SetActive(false);
         _musicSoundMenu.SetActive(false);
@@ -48,17 +48,17 @@ public class ButtonMenu : MonoBehaviour
     }
     public void CreditsButton()
     {
-        _mainMenu.SetActive(false);
+        _mainMenu.SetActive(true);
         _creditsMenu.SetActive(true);
     }
     public void ControlsButton() 
     {
-        _settingsMenu.SetActive(false);
+        _settingsMenu.SetActive(true);
         _controlsMenu.SetActive(true);
     }
     public void MusicSoundButton()
     {
-        _settingsMenu.SetActive(false);
+        _settingsMenu.SetActive(true);
         _musicSoundMenu.SetActive(true);
     }
     public void UnPause()
