@@ -2107,7 +2107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca8d0506e3af9348934cc63cbac5207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
+  _player: {fileID: 1623033965}
+  _failedPauseMenu: {fileID: 782628377}
   _game: TimeFroggo
   _mainScene: Lobby
 --- !u!1 &559618483
@@ -8403,6 +8404,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 963194229}
     - target: {fileID: 1424889843274775148, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424889843274775148, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
@@ -8435,6 +8440,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 31129514}
     - target: {fileID: 5098881187200414175, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
+      propertyPath: _restartQuit
+      value: 
+      objectReference: {fileID: 512374452}
+    - target: {fileID: 5098881187200414175, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       propertyPath: _audioManager
       value: 
       objectReference: {fileID: 1404521634}
@@ -8442,6 +8451,10 @@ PrefabInstance:
       propertyPath: _failedPauseMenu
       value: 
       objectReference: {fileID: 782628377}
+    - target: {fileID: 7892351165591423415, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8273881896450419085, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       propertyPath: _rotationEcho
       value: 

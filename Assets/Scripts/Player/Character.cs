@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        _failedPauseMenu.UnPause();
+        _restartQuit.UnPause();
         _paused = false;
     }
     private void Update()
@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
 
         if (_paused == false)
         {
-            _failedPauseMenu.UnPause();
+            _restartQuit.UnPause();
         }
 
         DrawRaycasts();
@@ -158,10 +158,10 @@ public class Character : MonoBehaviour
         Debug.DrawRay(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
         Debug.DrawRay(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.back) * 1, Color.red);
 
-        Debug.DrawRay(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.down) * 1, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.down) * 1, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down) * 3f, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down) * 3f, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.down) * 3f, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.down) * 3f, Color.red);
     }
     private void DestroyPlayer()
     {
@@ -169,6 +169,7 @@ public class Character : MonoBehaviour
     }
     private void GameOver()
     {
+        //GetComponent(PlayerMove).enable = false;
         _failedPauseMenu._failedMenu.SetActive(true);
         _groundSpawn._truckSfx.mute = true;
         _groundSpawn._forestSfx.mute = true;
@@ -176,12 +177,12 @@ public class Character : MonoBehaviour
         _groundSpawn._snowStormSfx.mute = true;
         _groundSpawn._riverSfx.mute = true;
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        BoxCollider collider = GetComponent<BoxCollider>();
-        Gizmos.DrawCube(transform.position + collider.center, collider.size);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.green;
+    //    BoxCollider collider = GetComponent<BoxCollider>();
+    //    Gizmos.DrawCube(transform.position + collider.center, collider.size);
+    //}
     public void Escape(CallbackContext callbackContext)
     {
         if (callbackContext.phase != InputActionPhase.Started)

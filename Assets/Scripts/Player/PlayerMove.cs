@@ -246,7 +246,6 @@ public class PlayerMove : MonoBehaviour
             _lastIcePlatform.enabled = false;
         }
         transform.SetParent(null);
-        //_player._graphics.transform.SetParent(null);
         _echo.InvokeEchoStopSlide(transform.position);
     }
     public void MoveLeft()
@@ -271,7 +270,6 @@ public class PlayerMove : MonoBehaviour
             _lastIcePlatform.enabled = false;
         }
         transform.SetParent(null);
-        //_player._graphics.transform.SetParent(null);
         _echo.InvokeEchoStopSlide(transform.position);
     }
     public void MoveUp()
@@ -316,16 +314,9 @@ public class PlayerMove : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.z = _currentPositionZ;
 
-        //float xPos = transform.position.x;
-        //int roundXPos = Mathf.RoundToInt(xPos);
-        //Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
-        //transform.position = pos;
-        //_currentPositionX = roundXPos;
-        //_echo.AddExitPlatformPosition(pos);
-
         bool isAllRaycastCollide = true;
         bool isWater = true;
-        if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down), out RaycastHit hit, 1))
+        if (Physics.Raycast(new Vector3(transform.position.x + .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down), out RaycastHit hit, 3))
         {
             isWater = isWater && hit.transform.CompareTag("Water");
         }
@@ -333,7 +324,7 @@ public class PlayerMove : MonoBehaviour
         {
             isAllRaycastCollide = false;
         }
-        if (Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, 1))
+        if (Physics.Raycast(new Vector3(transform.position.x - .4f, transform.position.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, 3))
         {
             isWater = isWater && hit.transform.CompareTag("Water");
         }
@@ -341,7 +332,7 @@ public class PlayerMove : MonoBehaviour
         {
             isAllRaycastCollide = false;
         }
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.down), out hit, 1))
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z + .4f), transform.TransformDirection(Vector3.down), out hit, 3))
         {
             isWater = isWater && hit.transform.CompareTag("Water");
         }
@@ -349,7 +340,7 @@ public class PlayerMove : MonoBehaviour
         {
             isAllRaycastCollide = false;
         }
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.down), out hit, 1))
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z - .4f), transform.TransformDirection(Vector3.down), out hit, 3))
         {
             isWater = isWater && hit.transform.CompareTag("Water");
         }

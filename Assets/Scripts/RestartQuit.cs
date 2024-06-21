@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class RestartQuit : MonoBehaviour
 {
     [SerializeField] private Character _player;
+    [SerializeField] private FailedPauseMenu _failedPauseMenu;
     [SerializeField] private string _game;
     [SerializeField] private string _mainScene;
 
@@ -19,7 +20,7 @@ public class RestartQuit : MonoBehaviour
     }
     public void UnPause()
     {
-        _player._paused = false;
+        _failedPauseMenu.UnPause();
         Time.timeScale = 1.0f;
     }
 }

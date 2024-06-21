@@ -26,10 +26,12 @@ public class FailedPauseMenu : MonoBehaviour
     }
     public void PauseMenu()
     {
+        _player._paused = true;
         _pauseMenu.SetActive(true);
     }
     public void UnPause()
     {
+        _player._paused = false;
         _pauseMenu.SetActive(false);
     }
 }
