@@ -110,6 +110,7 @@ public class Character : MonoBehaviour
             int roundXPos = (int)xPos;
             Vector3 pos = new Vector3(roundXPos, transform.position.y, transform.position.z);
             transform.position = pos;
+            Debug.Log(transform.position);
             _playerMove._currentPositionX = roundXPos;
             //transform.position = new Vector3 (_playerMove._currentPositionX, transform.position.y, transform.position.z);            
             _echo.AddExitPlatformPosition(pos);

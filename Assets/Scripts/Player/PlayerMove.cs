@@ -52,6 +52,12 @@ public class PlayerMove : MonoBehaviour
 
         if (_player.IsOnMovingPlatform == false)
         {
+            _targetPosition = new Vector3(
+                Mathf.RoundToInt(_targetPosition.x),
+                _targetPosition.y,
+                Mathf.RoundToInt(_targetPosition.z)
+                );
+
             Vector3 nextPosition = Vector3.Lerp(transform.position, _targetPosition, .2f);
             transform.position = nextPosition;
         }
