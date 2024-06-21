@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     [SerializeField] private Character _player;
     [SerializeField] private GroundSpawn _groundSpawn;
     [SerializeField] private Echo _echo;
-    [SerializeField] private RestartQuit _buttonMenu;
+    [SerializeField] private RestartQuit _restartQuit;
     [SerializeField] private FailedPauseMenu _failedPauseMenu;
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private PlayerMove _playerMove;
@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         _audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        _buttonMenu.UnPause();
+        _failedPauseMenu.UnPause();
         _paused = false;
     }
     private void Update()
@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
 
         if (_paused == false)
         {
-            _failedPauseMenu.Unpause();
+            _failedPauseMenu.UnPause();
         }
 
         DrawRaycasts();

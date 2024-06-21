@@ -28,7 +28,7 @@ public class FailedPauseMenu : MonoBehaviour
     {
         _pauseMenu.SetActive(true);
     }
-    public void Unpause()
+    public void UnPause()
     {
         _pauseMenu.SetActive(false);
     }

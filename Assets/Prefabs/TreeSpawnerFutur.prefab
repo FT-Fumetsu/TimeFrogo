@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6169138141372393081
+--- !u!1 &6808479676285280879
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3090706704087951549}
+  - component: {fileID: 1143239543864447569}
   m_Layer: 0
-  m_Name: Tree Spawner Left (1)
+  m_Name: Tree Spawner Right
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3090706704087951549
+--- !u!4 &1143239543864447569
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6169138141372393081}
+  m_GameObject: {fileID: 6808479676285280879}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: 0}
+  m_LocalPosition: {x: 7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62,11 +62,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1513249162737426670}
-  - {fileID: 3090706704087951549}
-  - {fileID: 5537467918468452829}
-  - {fileID: 5822859135892119989}
-  - {fileID: 7766524355137083717}
-  - {fileID: 7108698573911560464}
+  - {fileID: 1143239543864447569}
+  - {fileID: 2579326926153061331}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5633597444968198148
@@ -83,19 +80,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawners:
   - {fileID: 1513249162737426670}
-  - {fileID: 3090706704087951549}
-  - {fileID: 5537467918468452829}
-  - {fileID: 5822859135892119989}
-  - {fileID: 7766524355137083717}
-  - {fileID: 7108698573911560464}
+  - {fileID: 2579326926153061331}
+  - {fileID: 1143239543864447569}
   _treesPrefab:
-  - {fileID: 1090292453140071706, guid: da9a7a514ea4aae44863e595935773e0, type: 3}
-  - {fileID: 3610954106475755753, guid: 08bdc7ce78812d54582c016d942ade67, type: 3}
-  - {fileID: 5854203840377342237, guid: bc4113ed21c670d43b8725b17075e980, type: 3}
-  _offsetPosition: 0.2
-  _offsetRotation: 180
-  _offsetScale: 0.5
---- !u!1 &7197220999494806649
+  - {fileID: 7957985144283440216, guid: 5a2ad0c45b4c3cb40bedaf490f445479, type: 3}
+  - {fileID: 6860375375744606863, guid: a6af4dc8cefce4e4c85464fdfd67b26a, type: 3}
+  - {fileID: 8631069509591868729, guid: 9d1ac87dfb731544bb1cf82d1b1200ca, type: 3}
+  - {fileID: 360693290278533075, guid: dbe37b92961005944a85dfa8db04701f, type: 3}
+  - {fileID: 6874621750384815524, guid: 4b6515906189b2345a8d1c828560de9f, type: 3}
+  - {fileID: 1324775538361304850, guid: 51812737d88e18044a1e0a0c3392faba, type: 3}
+  - {fileID: 1641097360538877176, guid: c79a33cc428bd3144950da50ba7fde12, type: 3}
+  _offsetPosition: 0
+  _offsetRotation: 0
+  _offsetScale: 0
+--- !u!1 &7268987142725501067
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,86 +101,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5822859135892119989}
+  - component: {fileID: 2579326926153061331}
   m_Layer: 0
-  m_Name: Tree Spawner Right (1)
+  m_Name: Tree Spawner Left (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5822859135892119989
+--- !u!4 &2579326926153061331
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7197220999494806649}
+  m_GameObject: {fileID: 7268987142725501067}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6275257585186008}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7682868093347115080
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7108698573911560464}
-  m_Layer: 0
-  m_Name: Tree Spawner Right (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7108698573911560464
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7682868093347115080}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6275257585186008}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7863567342628619372
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7766524355137083717}
-  m_Layer: 0
-  m_Name: Tree Spawner Right (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7766524355137083717
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7863567342628619372}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7, y: 0, z: 0}
+  m_LocalPosition: {x: -11, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -213,38 +149,7 @@ Transform:
   m_GameObject: {fileID: 7986362577385321498}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6275257585186008}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &9099171226015650522
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5537467918468452829}
-  m_Layer: 0
-  m_Name: Tree Spawner Left (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5537467918468452829
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9099171226015650522}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8, y: 0, z: 0}
+  m_LocalPosition: {x: -7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
