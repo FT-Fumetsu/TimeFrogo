@@ -114,7 +114,7 @@ public class GroundSpawn : MonoBehaviour
                 whichTerrain = Random.Range(0, _choixList.Count);
                 _nextGroundData = _choixList[whichTerrain];
             }
-            while (_nextGroundData.GetComponent<Water>)
+            //while (_nextGroundData.GetComponent<Water>)
             if (_nextGroundData._maxInSuccesion > 0)
             {
                 groundInSuccession = Random.Range(1, _choixList[whichTerrain]._maxInSuccesion);

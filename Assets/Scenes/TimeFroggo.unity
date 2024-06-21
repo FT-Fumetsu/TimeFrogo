@@ -8453,7 +8453,7 @@ PrefabInstance:
       objectReference: {fileID: 782628377}
     - target: {fileID: 7892351165591423415, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8273881896450419085, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       propertyPath: _rotationEcho
