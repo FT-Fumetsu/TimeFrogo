@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 860151778008131313, guid: e30d4a7bce85c0f47906e4d355e3ea28, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4963357638902873802, guid: e30d4a7bce85c0f47906e4d355e3ea28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -55,6 +59,14 @@ PrefabInstance:
     - target: {fileID: 5740598403968443504, guid: e30d4a7bce85c0f47906e4d355e3ea28, type: 3}
       propertyPath: m_Name
       value: Grass Variant 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821903252779207629, guid: e30d4a7bce85c0f47906e4d355e3ea28, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231739610377228802, guid: e30d4a7bce85c0f47906e4d355e3ea28, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8005038870244116664, guid: e30d4a7bce85c0f47906e4d355e3ea28, type: 3}
       propertyPath: m_LocalPosition.x

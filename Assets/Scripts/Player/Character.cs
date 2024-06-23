@@ -58,7 +58,7 @@ public class Character : MonoBehaviour
     {
         if (other.gameObject.tag == "Vehicle")
         {
-            GameOver();
+            Invoke(nameof(GameOver), 1f);
             _audioManager.PlaySFX(_audioManager._deathCrush);
             _audioManager.PlaySFX(_audioManager._deathTruck);
             _groundSpawn._isAlive = false;
@@ -73,11 +73,13 @@ public class Character : MonoBehaviour
         }
         else if (other.gameObject.tag == "Crate")
         {
-            GameOver();
+            _animations.CrateKill();
+            Invoke(nameof(GameOver), 1f);
             _audioManager.PlaySFX(_audioManager._deathCrush);
             _audioManager.PlaySFX(_audioManager._deathTruck);
             _groundSpawn._isAlive = false;
-            DestroyPlayer();
+            _playerMove.enabled = false;
+            Invoke(nameof(DestroyPlayer), 0.3f);
         }
         else if(other.gameObject.tag == "Echo")
         {            
@@ -85,24 +87,27 @@ public class Character : MonoBehaviour
             Invoke(nameof(DestroyPlayer), 2f);
             GameOver();
             _echo.DisableEcho();
+            _playerMove.enabled = false;
             _groundSpawn._isAlive = false;
-
         }
         else if(other.gameObject.tag == "Trapdoor")
         {
             _animations.TrapKill();
-            Invoke(nameof(DestroyPlayer), 0.6052631f);
-            GameOver();
+            Invoke(nameof(DestroyPlayer), 1f);
+            Invoke(nameof(GameOver), 0.25f);
             _audioManager.PlaySFX(_audioManager._fall);
+            _playerMove.enabled = false;
             _groundSpawn._isAlive = false;
 
         }
         else if (other.gameObject.tag == "Laser")
         {
+            
             _animations.LaserKill();
-            Invoke(nameof(DestroyPlayer), 0.4827586f);
-            GameOver();
+            Invoke(nameof(DestroyPlayer), 1f);
+            Invoke(nameof(GameOver), 0.25f);
             _audioManager.PlaySFX(_audioManager._laserShot);
+            _playerMove.enabled = false;
             _groundSpawn._isAlive = false;            
         }
     }

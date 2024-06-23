@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: _wallCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5426053021638677067, guid: b975aadb809006940b6e0a0d06472932, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5579643920786684620, guid: b975aadb809006940b6e0a0d06472932, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

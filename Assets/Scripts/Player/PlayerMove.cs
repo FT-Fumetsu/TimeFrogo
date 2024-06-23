@@ -61,8 +61,6 @@ public class PlayerMove : MonoBehaviour
             Vector3 nextPosition = Vector3.Lerp(transform.position, _targetPosition, .2f);
             transform.position = nextPosition;
         }
-
-        _textScore.SetText("Score : " + _score.ToString());
     }
 
     public void PlayerMoveUp(CallbackContext callbackContext)

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 826999068576428775, guid: 5f02d2db5b8f2e5499109b6ea591c72b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1448798681472802138, guid: 5f02d2db5b8f2e5499109b6ea591c72b, type: 3}
       propertyPath: m_Name
       value: Grass Variant 7
@@ -63,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 3793725355812155794, guid: 5f02d2db5b8f2e5499109b6ea591c72b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606572949689019176, guid: 5f02d2db5b8f2e5499109b6ea591c72b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6563317767588742497, guid: 5f02d2db5b8f2e5499109b6ea591c72b, type: 3}
       propertyPath: m_LocalPosition.x

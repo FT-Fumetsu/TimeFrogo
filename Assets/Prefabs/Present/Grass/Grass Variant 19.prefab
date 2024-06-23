@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass Variant 19
       objectReference: {fileID: 0}
+    - target: {fileID: 6229285697867608869, guid: 2453f6767186989428c01c03b72cddce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7126133472122465002, guid: 2453f6767186989428c01c03b72cddce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7615248387030462544, guid: 2453f6767186989428c01c03b72cddce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1

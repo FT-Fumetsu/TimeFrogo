@@ -12,6 +12,7 @@ public class Echo : MonoBehaviour
     [SerializeField] private MoveEchoSfx _moveEchoSfx;
     [SerializeField] private Animations _animations;
     [SerializeField] private PlayerMove _playerMove;
+    [SerializeField] private Echo _echo;
 
     [Header("Balancing")]
     [SerializeField] private float _movement = 1f;
@@ -28,6 +29,7 @@ public class Echo : MonoBehaviour
 
     private void Start()
     {
+        _echo = GetComponent<Echo>();
         _echoSpeed = 0;
     }
     private void Update()
@@ -163,6 +165,6 @@ public class Echo : MonoBehaviour
 
     public void DisableEcho()
     {
-        gameObject.GetComponent<Echo>().enabled = false;
+        _echo.enabled = false;
     }
 }

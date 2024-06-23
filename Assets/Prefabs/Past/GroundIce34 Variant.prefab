@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4918126837900812267, guid: 79b3dc585183e9e48b494dd4d68285b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5879005893461153478, guid: 79b3dc585183e9e48b494dd4d68285b0, type: 3}
       propertyPath: m_Name
       value: GroundIce34 Variant

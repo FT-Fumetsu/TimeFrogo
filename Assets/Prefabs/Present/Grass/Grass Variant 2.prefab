@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 109775537029235358, guid: 9a41064e2a985954180369f8d3d257c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 778508007252662308, guid: 9a41064e2a985954180369f8d3d257c3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1
@@ -63,6 +67,14 @@ PrefabInstance:
     - target: {fileID: 3058224855640536300, guid: 9a41064e2a985954180369f8d3d257c3, type: 3}
       propertyPath: m_Name
       value: Grass Variant 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824051625884343121, guid: 9a41064e2a985954180369f8d3d257c3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302797753659967270, guid: 9a41064e2a985954180369f8d3d257c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7313356822732598487, guid: 9a41064e2a985954180369f8d3d257c3, type: 3}
       propertyPath: m_LocalPosition.x

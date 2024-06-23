@@ -84,11 +84,6 @@ public class GroundSpawn : MonoBehaviour
             }
             ChangeBiome();
         }
-
-        if(Input.GetKeyDown(KeyCode.Space)) 
-        {
-            _chronoChangeBiome = 59f;
-        }
     }
     private void SafeSpawn()
     {
@@ -108,7 +103,7 @@ public class GroundSpawn : MonoBehaviour
         {
             whichTerrain = Random.Range(0, _choixList.Count);
             _nextGroundData = _choixList[whichTerrain];
-            while (_nextGroundData == _lastGroundData/* || _lastGroundData.ground.CompareTag("Water")*/)
+            while (_nextGroundData == _lastGroundData)
             {
                 Debug.Log("Replace Water");
                 whichTerrain = Random.Range(0, _choixList.Count);
@@ -132,7 +127,7 @@ public class GroundSpawn : MonoBehaviour
 
             _consecutiveObstacleCount += chunk.WallCount;
 
-            if(_consecutiveObstacleCount > 6 )
+            if(_consecutiveObstacleCount > 6 || _lastGroundData.ground.CompareTag("Water"))
             {
                 Destroy(ground);
                 ground = Instantiate(_defaultGround.ground, _currentPosition, Quaternion.identity);

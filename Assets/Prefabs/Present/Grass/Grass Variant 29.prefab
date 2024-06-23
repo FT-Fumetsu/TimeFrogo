@@ -56,9 +56,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass Variant 29
       objectReference: {fileID: 0}
+    - target: {fileID: 3703204883292532389, guid: 25adfc7aa4386544a890d2d0494d5737, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146386139117499090, guid: 25adfc7aa4386544a890d2d0494d5737, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 7281976143115360853, guid: 25adfc7aa4386544a890d2d0494d5737, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945781396544602351, guid: 25adfc7aa4386544a890d2d0494d5737, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

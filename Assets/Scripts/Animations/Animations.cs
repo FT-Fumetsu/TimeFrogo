@@ -8,6 +8,9 @@ public class Animations : MonoBehaviour
     [SerializeField] private EchoAnimation _echo;
     [SerializeField] private LaserFroggoAnimation _laserFroggo;
     [SerializeField] private TrapdoorAnimation _trapdoor;
+    [SerializeField] private LaserAnimation _laser;
+    [SerializeField] private CrateAnim _crate;
+    [SerializeField] private RotationPlayer _visuPlayer;
 
     public void EchoJump()
     {
@@ -29,6 +32,14 @@ public class Animations : MonoBehaviour
     }
     public void LaserKill()
     {
+        _visuPlayer.enabled = false;
+        _laserFroggo.enabled = true;
         _laserFroggo.LaserKill();
+        _laser.LaserKill();
+    }
+    
+    public void CrateKill()
+    {
+        _crate.CrateKill();
     }
 }
