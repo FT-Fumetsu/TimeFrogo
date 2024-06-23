@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf822b8d84bc3241a8f5bd184172c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
+  _player: {fileID: 1623033965}
   _safeSpawn: {fileID: 7610077538955306132, guid: 7c32205a9b244b94a80230f075976df7, type: 3}
   _groundHolder: {fileID: 31129515}
   _groundDatasPresent:
@@ -1378,6 +1378,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271388315}
   m_CullTransparentMesh: 1
+--- !u!1 &274227141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3981046434654247728, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
+  m_PrefabInstance: {fileID: 7020666741801811}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &286381473
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,7 +2113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1623033965}
-  _failedPauseMenu: {fileID: 782628377}
+  _failedPauseMenu: {fileID: 1623033975}
   _game: TimeFroggo
   _mainScene: Lobby
 --- !u!1 &559618483
@@ -2944,7 +2949,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 782628376}
-  - component: {fileID: 782628377}
   m_Layer: 0
   m_Name: AllCanvas
   m_TagString: Untagged
@@ -2970,21 +2974,6 @@ Transform:
   - {fileID: 286381477}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &782628377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782628375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21efc89811046b8458197ca0c9addd32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 1623033965}
-  _failedMenu: {fileID: 1446208480}
-  _pauseMenu: {fileID: 286381473}
 --- !u!1 &786993099
 GameObject:
   m_ObjectHideFlags: 0
@@ -7280,7 +7269,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5098881187200414175, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
   m_PrefabInstance: {fileID: 7020666741801811}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 274227141}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 688f82e9d1918a8499778137beb786e1, type: 3}
@@ -7291,6 +7280,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 915270791708494577, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
   m_PrefabInstance: {fileID: 7020666741801811}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1623033971 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1132691832299187017, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
+  m_PrefabInstance: {fileID: 7020666741801811}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274227141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6d72f9ced067248bc3efe6fb68a63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1623033975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274227141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21efc89811046b8458197ca0c9addd32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1623033965}
+  _failedMenu: {fileID: 1446208480}
+  _pauseMenu: {fileID: 286381473}
 --- !u!4 &1754105936 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8119769157450884978, guid: 70f7cad7c2eca414f8035e1893eee096, type: 3}
@@ -8450,7 +8465,7 @@ PrefabInstance:
     - target: {fileID: 5098881187200414175, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       propertyPath: _failedPauseMenu
       value: 
-      objectReference: {fileID: 782628377}
+      objectReference: {fileID: 1623033975}
     - target: {fileID: 7892351165591423415, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       propertyPath: m_UseGravity
       value: 1
@@ -8465,7 +8480,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 915270791708494577, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
       insertIndex: -1
       addedObject: {fileID: 786993100}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3981046434654247728, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1623033975}
   m_SourcePrefab: {fileID: 100100000, guid: f708c79a8a0287e4abf4c1f76755fa86, type: 3}
 --- !u!114 &7020666741801812 stripped
 MonoBehaviour:
@@ -8565,6 +8583,10 @@ PrefabInstance:
       propertyPath: _animations
       value: 
       objectReference: {fileID: 704008846}
+    - target: {fileID: 6903762839847470071, guid: 70f7cad7c2eca414f8035e1893eee096, type: 3}
+      propertyPath: _playerMove
+      value: 
+      objectReference: {fileID: 1623033971}
     - target: {fileID: 6903762839847470071, guid: 70f7cad7c2eca414f8035e1893eee096, type: 3}
       propertyPath: _currentPositionx
       value: 0

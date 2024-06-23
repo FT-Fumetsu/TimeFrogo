@@ -47,6 +47,11 @@ public class Character : MonoBehaviour
             _restartQuit.UnPause();
         }
 
+        if(!IsOnMovingPlatform)
+        {
+            _playerMove.PositionX();
+        }
+        
         DrawRaycasts();
     }
     private void OnTriggerEnter(Collider other)
@@ -75,10 +80,11 @@ public class Character : MonoBehaviour
             DestroyPlayer();
         }
         else if(other.gameObject.tag == "Echo")
-        {
+        {            
             _animations.EchoKill();
             Invoke(nameof(DestroyPlayer), 2f);
             GameOver();
+            _echo.DisableEcho();
             _groundSpawn._isAlive = false;
 
         }
@@ -112,7 +118,7 @@ public class Character : MonoBehaviour
             transform.position = pos;
             Debug.Log(transform.position);
             _playerMove._currentPositionX = roundXPos;
-            //transform.position = new Vector3 (_playerMove._currentPositionX, transform.position.y, transform.position.z);            
+            
             _echo.AddExitPlatformPosition(pos);
             _echo.InvokeExitPlatform();
 
@@ -170,7 +176,7 @@ public class Character : MonoBehaviour
     }
     private void GameOver()
     {
-        //GetComponent(PlayerMove).enable = false;
+        gameObject.GetComponent<PlayerMove>().enabled = false;
         _failedPauseMenu._failedMenu.SetActive(true);
         _groundSpawn._truckSfx.mute = true;
         _groundSpawn._forestSfx.mute = true;
@@ -178,12 +184,6 @@ public class Character : MonoBehaviour
         _groundSpawn._snowStormSfx.mute = true;
         _groundSpawn._riverSfx.mute = true;
     }
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.green;
-    //    BoxCollider collider = GetComponent<BoxCollider>();
-    //    Gizmos.DrawCube(transform.position + collider.center, collider.size);
-    //}
     public void Escape(CallbackContext callbackContext)
     {
         if (callbackContext.phase != InputActionPhase.Started)

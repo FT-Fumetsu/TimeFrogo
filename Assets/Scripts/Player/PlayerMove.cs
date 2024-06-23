@@ -391,4 +391,11 @@ public class PlayerMove : MonoBehaviour
             return;
         }
     }
+
+    public void PositionX()
+    {        
+        transform.position = new Vector3(_currentPositionX, transform.position.y, _currentPositionZ);
+        //Vector3 fixedPosition = transform.position;
+        //_echo.AddExitPlatformPosition(fixedPosition);
+    }
 }

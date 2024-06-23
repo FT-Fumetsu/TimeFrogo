@@ -21,10 +21,9 @@ public class RestartQuit : MonoBehaviour
     }
     public void UnPause()
     {
+        _player._paused = false;
         _failedPauseMenu.UnPause();
         Time.timeScale = 1.0f;
     }
-   
-
 }
 

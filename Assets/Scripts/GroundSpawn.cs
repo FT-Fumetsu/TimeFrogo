@@ -106,15 +106,14 @@ public class GroundSpawn : MonoBehaviour
 
         if (groundInSuccession == 0)
         {
-            bool water = true;
             whichTerrain = Random.Range(0, _choixList.Count);
             _nextGroundData = _choixList[whichTerrain];
-            while (_nextGroundData == _lastGroundData)
+            while (_nextGroundData == _lastGroundData/* || _lastGroundData.ground.CompareTag("Water")*/)
             {
+                Debug.Log("Replace Water");
                 whichTerrain = Random.Range(0, _choixList.Count);
                 _nextGroundData = _choixList[whichTerrain];
             }
-            //while (_nextGroundData.GetComponent<Water>)
             if (_nextGroundData._maxInSuccesion > 0)
             {
                 groundInSuccession = Random.Range(1, _choixList[whichTerrain]._maxInSuccesion);
@@ -133,7 +132,7 @@ public class GroundSpawn : MonoBehaviour
 
             _consecutiveObstacleCount += chunk.WallCount;
 
-            if(_consecutiveObstacleCount > 6)
+            if(_consecutiveObstacleCount > 6 )
             {
                 Destroy(ground);
                 ground = Instantiate(_defaultGround.ground, _currentPosition, Quaternion.identity);

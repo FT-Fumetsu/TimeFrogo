@@ -11,6 +11,7 @@ public class Echo : MonoBehaviour
     [SerializeField] private EchoTimes _echoTimes;
     [SerializeField] private MoveEchoSfx _moveEchoSfx;
     [SerializeField] private Animations _animations;
+    [SerializeField] private PlayerMove _playerMove;
 
     [Header("Balancing")]
     [SerializeField] private float _movement = 1f;
@@ -158,5 +159,10 @@ public class Echo : MonoBehaviour
     public void AddExitPlatformPosition(Vector3 position)
     {
         _exitPlatformPosition.Add(position);
+    }
+
+    public void DisableEcho()
+    {
+        gameObject.GetComponent<Echo>().enabled = false;
     }
 }
